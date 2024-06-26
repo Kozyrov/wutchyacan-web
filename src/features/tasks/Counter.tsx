@@ -10,20 +10,20 @@ import {
   incrementIfOdd,
   selectCount,
   selectStatus,
-} from "./counterSlice"
+} from "./tasksSlice"
 
 export const Counter = () => {
   const dispatch = useAppDispatch()
-  const count = useAppSelector(selectCount)
-  const status = useAppSelector(selectStatus)
-  const [incrementAmount, setIncrementAmount] = useState("2")
+  // const count = useAppSelector(selectCount)
+  // const status = useAppSelector(selectStatus)
+  // const [incrementAmount, setIncrementAmount] = useState("2")
 
-  const incrementValue = Number(incrementAmount) || 0
+  // const incrementValue = Number(incrementAmount) || 0
 
   return (
     <div>
       <div className={styles.row}>
-        <button
+        {/* <button
           className={styles.button}
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
@@ -32,7 +32,7 @@ export const Counter = () => {
         </button>
         <span aria-label="Count" className={styles.value}>
           {count}
-        </span>
+        </span> */}
         <button
           className={styles.button}
           aria-label="Increment value"
@@ -41,7 +41,7 @@ export const Counter = () => {
           +
         </button>
       </div>
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <input
           className={styles.textbox}
           aria-label="Set increment amount"
@@ -72,7 +72,7 @@ export const Counter = () => {
         >
           Add If Odd
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }

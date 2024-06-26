@@ -1,20 +1,34 @@
-import type { PayloadAction } from "@reduxjs/toolkit"
+import { createEntityAdapter, type PayloadAction } from "@reduxjs/toolkit"
 import { createAppSlice } from "../../app/createAppSlice"
 import type { AppThunk } from "../../app/store"
-import { fetchCount } from "./counterAPI"
+// import { fetchCount } from "./counterAPI"
 
-export interface CounterSliceState {
-  value: number
+export interface Task {
+  id: string;
+  label: string;
+  order: number;
+  points: number;
+  
+}
+
+export interface TasksSliceState {
+  byId: Map<string, Task>,
+  orderedIds: string[],
   status: "idle" | "loading" | "failed"
 }
 
-const initialState: CounterSliceState = {
-  value: 0,
-  status: "idle",
-}
+const taskAdapter = createEntityAdapter<Task>({
+  sortComparer: (a: Task, b: Task) => a.points - b.points
+})
+
+const initialState = taskAdapter.getInitialState({
+  byId: {},
+  orderedIds: [],
+  status: "idle"
+});
 
 // If you are not using async thunks you can use the standalone `createSlice`.
-export const counterSlice = createAppSlice({
+export const taskListSlice = createAppSlice({
   name: "counter",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -41,25 +55,25 @@ export const counterSlice = createAppSlice({
     // will call the thunk with the `dispatch` function as the first argument. Async
     // code can then be executed and other actions can be dispatched. Thunks are
     // typically used to make async requests.
-    incrementAsync: create.asyncThunk(
-      async (amount: number) => {
-        const response = await fetchCount(amount)
-        // The value we return becomes the `fulfilled` action payload
-        return response.data
-      },
-      {
-        pending: state => {
-          state.status = "loading"
-        },
-        fulfilled: (state, action) => {
-          state.status = "idle"
-          state.value += action.payload
-        },
-        rejected: state => {
-          state.status = "failed"
-        },
-      },
-    ),
+    // incrementAsync: create.asyncThunk(
+    //   async (amount: number) => {
+    //     const response = await fetchCount(amount)
+    //     // The value we return becomes the `fulfilled` action payload
+    //     return response.data
+    //   },
+    //   {
+    //     pending: state => {
+    //       state.status = "loading"
+    //     },
+    //     fulfilled: (state, action) => {
+    //       state.status = "idle"
+    //       state.value += action.payload
+    //     },
+    //     rejected: state => {
+    //       state.status = "failed"
+    //     },
+    //   },
+    // ),
   }),
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.

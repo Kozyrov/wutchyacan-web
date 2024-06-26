@@ -1,13 +1,13 @@
 import type { AppStore } from "../../app/store"
 import { makeStore } from "../../app/store"
-import type { CounterSliceState } from "./counterSlice"
+import type { CounterSliceState } from "./tasksSlice"
 import {
   counterSlice,
   decrement,
   increment,
   incrementByAmount,
   selectCount,
-} from "./counterSlice"
+} from "./tasksSlice"
 
 interface LocalTestContext {
   store: AppStore
