@@ -2,15 +2,7 @@ import { useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import styles from "./Counter.module.css"
-import {
-  decrement,
-  increment,
-  incrementAsync,
-  incrementByAmount,
-  incrementIfOdd,
-  selectCount,
-  selectStatus,
-} from "./tasksSlice"
+import { addTask, removeTask, type Task } from "./tasksSlice"
 
 export const Counter = () => {
   const dispatch = useAppDispatch()
@@ -19,6 +11,17 @@ export const Counter = () => {
   // const [incrementAmount, setIncrementAmount] = useState("2")
 
   // const incrementValue = Number(incrementAmount) || 0
+
+  const generateBlankTask = (): Task => {
+    const rndmId = Date.now() + Math.random()
+    return {
+      id: rndmId.toString(),
+      label: "",
+      points: 0,
+      completed: false,
+      removed: false,
+    }
+  }
 
   return (
     <div>
@@ -35,8 +38,8 @@ export const Counter = () => {
         </span> */}
         <button
           className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          aria-label="Add blank task"
+          onClick={() => dispatch(addTask(generateBlankTask()))}
         >
           +
         </button>
