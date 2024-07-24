@@ -6,7 +6,7 @@ import { addTask, removeTask, type Task } from "./tasksSlice"
 
 export const Counter = () => {
   const dispatch = useAppDispatch()
-  // const count = useAppSelector(selectCount)
+  const tasks = useAppSelector()
   // const status = useAppSelector(selectStatus)
   // const [incrementAmount, setIncrementAmount] = useState("2")
 
