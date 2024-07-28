@@ -1,5 +1,5 @@
 import "./App.css"
-import { Counter } from "./features/tasks/Counter"
+import { Tasks } from "./features/tasks/Tasks"
 import { Quotes } from "./features/quotes/Quotes"
 import logo from "./logo.svg"
 
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Counter />
+        <Tasks />
         {/* <Quotes />
         <span>
           <span>Learn </span>

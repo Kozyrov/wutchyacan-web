@@ -1,27 +1,33 @@
 import { useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import styles from "./Counter.module.css"
-import { addTask, removeTask, type Task } from "./tasksSlice"
+import styles from "./Tasks.module.css"
+import { addTask, removeTask, selectTaskEntities, type Task } from "./tasksSlice"
+import { randomIdString } from "../../utils/utility-methods";
+import { nanoid } from "@reduxjs/toolkit";
 
-export const Counter = () => {
-  const dispatch = useAppDispatch()
-  const tasks = useAppSelector()
-  // const status = useAppSelector(selectStatus)
-  // const [incrementAmount, setIncrementAmount] = useState("2")
+export const Tasks = () => {
+  const dispatch = useAppDispatch();
+  const tasks: Record<string, Task> = useAppSelector(selectTaskEntities);
 
-  // const incrementValue = Number(incrementAmount) || 0
+  const generateBlankTask = (): Task => ({
+    id: nanoid(),
+    label: "",
+    points: 0,
+    completed: false,
+    removed: false,
+  });
 
-  const generateBlankTask = (): Task => {
-    const rndmId = Date.now() + Math.random()
-    return {
-      id: rndmId.toString(),
-      label: "",
-      points: 0,
-      completed: false,
-      removed: false,
-    }
-  }
+  const handleAddGeneratedTask = () => {
+    const generatedTask = generateBlankTask();
+    dispatch(addTask(generatedTask));
+  };
+
+  const renderTasks = () => Object.values(tasks).map((taskEntity: Task) => (
+    <div key={taskEntity.id}>
+      {taskEntity.id}
+    </div>
+  ));
 
   return (
     <div>
@@ -39,11 +45,12 @@ export const Counter = () => {
         <button
           className={styles.button}
           aria-label="Add blank task"
-          onClick={() => dispatch(addTask(generateBlankTask()))}
+          onClick={handleAddGeneratedTask}
         >
           +
         </button>
       </div>
+      {renderTasks()}
       {/* <div className={styles.row}>
         <input
           className={styles.textbox}
@@ -78,4 +85,4 @@ export const Counter = () => {
       </div> */}
     </div>
   )
-}
+};

@@ -16,7 +16,7 @@ export interface Task {
 
 export interface TasksSliceState {
   status: ReduxLoadingStatus,
-  removedTasks: Map<string, Task>,
+  removedTasks: { [removedId: string]: Task },
 }
 
 const tasksAdapter = createEntityAdapter<Task>({
@@ -26,7 +26,7 @@ const tasksAdapter = createEntityAdapter<Task>({
 
 const extendedTasksState: TasksSliceState = {
   status: "idle",
-  removedTasks: new Map<string, Task>(),
+  removedTasks: {}, 
 }
 
 const initialState = tasksAdapter.getInitialState(extendedTasksState);
@@ -40,7 +40,7 @@ export const tasksSlice = createAppSlice({
   reducers: {
     addTask: tasksAdapter.addOne,
     removeTask(state, action: PayloadAction<Task>) {
-      state.removedTasks.set(action.payload.id, action.payload);
+      state.removedTasks[action.payload.id] = action.payload;
       tasksAdapter.removeOne(state, action.payload.id);
     },
   },
@@ -59,11 +59,11 @@ export const { addTask, removeTask } =
 
 // Rename the exports for readability in component usage
 export const {
-  selectById: selectUserById,
-  selectIds: selectUserIds,
-  selectEntities: selectUserEntities,
-  selectAll: selectAllUsers,
-  selectTotal: selectTotalUsers,
+  selectById: selectTaskById,
+  selectIds: selectTaskIds,
+  selectEntities: selectTaskEntities,
+  selectAll: selectAllTasks,
+  selectTotal: selectTotalTasks,
 } = tasksAdapter.getSelectors((state: RootState) => state.tasks)
 
 // We can also write thunks by hand, which may contain both sync and async logic.
