@@ -32,16 +32,6 @@ export const Tasks = () => {
   return (
     <div>
       <div className={styles.row}>
-        {/* <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-        <span aria-label="Count" className={styles.value}>
-          {count}
-        </span> */}
         <button
           className={styles.button}
           aria-label="Add blank task"
@@ -51,38 +41,6 @@ export const Tasks = () => {
         </button>
       </div>
       {renderTasks()}
-      {/* <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          type="number"
-          onChange={e => {
-            setIncrementAmount(e.target.value)
-          }}
-        />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
-          Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          disabled={status !== "idle"}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => {
-            dispatch(incrementIfOdd(incrementValue))
-          }}
-        >
-          Add If Odd
-        </button>
-      </div> */}
     </div>
   )
 };
