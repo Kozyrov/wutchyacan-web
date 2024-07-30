@@ -23,9 +23,20 @@ export const Tasks = () => {
     dispatch(addTask(generatedTask));
   };
 
+  const handleRemoveSelectedTask = (targetTask: Task) => {
+    dispatch(removeTask(targetTask));
+  }
+
   const renderTasks = () => Object.values(tasks).map((taskEntity: Task) => (
-    <div key={taskEntity.id}>
-      {taskEntity.id}
+    <div className={styles.row} key={taskEntity.id}>
+      {taskEntity.id} 
+      <button
+        className={styles.button}
+        aria-label={`Remove task ${taskEntity.label}`}
+        onClick={() => handleRemoveSelectedTask(taskEntity)}
+      >
+        -
+      </button>
     </div>
   ));
 
