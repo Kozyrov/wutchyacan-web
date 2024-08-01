@@ -1,31 +1,21 @@
 import { useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import styles from "./Tasks.module.css"
-import {
-  addTask,
-  removeTask,
-  selectTaskEntities,
-  type Task,
-} from "./taskInboxSlice"
-import { randomIdString } from "../../utils/utility-methods"
-import { nanoid } from "@reduxjs/toolkit"
+import controlStyles from "../../shared/Controls.module.css"
+import styles from "./TaskInbox.module.css"
+import { type Task } from "../../shared/TaskDef"
+import { addInboxTask, selectTaskEntities } from "./taskInboxSlice"
+import { InlineTaskInput } from "../taskInput/InlineTaskInput"
+import { generateBlankTask } from "../../utils/utility-methods"
 
 export const TaskInbox = () => {
   const dispatch = useAppDispatch()
   const tasks: Record<string, Task> = useAppSelector(selectTaskEntities)
 
-  const generateBlankTask = (): Task => ({
-    id: nanoid(),
-    label: "",
-    points: 0,
-    completed: false,
-    removed: false,
-  })
+  const [addNewTaskInputOpen, setAddNewTaskInputOpen] = useState<boolean>(false)
 
-  const handleAddGeneratedTask = () => {
-    const generatedTask = generateBlankTask()
-    dispatch(addTask(generatedTask))
+  const handleSaveTask = (task: Task) => {
+    dispatch(addInboxTask(task))
   }
 
   const renderTasks = () =>
@@ -36,13 +26,16 @@ export const TaskInbox = () => {
   return (
     <div>
       <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label="Add blank task"
-          onClick={handleAddGeneratedTask}
-        >
-          +
-        </button>
+        {addNewTaskInputOpen ? (
+          <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
+            + Task
+          </button>
+        ) : (
+          <InlineTaskInput
+            incomingTask={generateBlankTask()}
+            saveTask={handleSaveTask}
+          />
+        )}
       </div>
       {renderTasks()}
     </div>
