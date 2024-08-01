@@ -2,13 +2,18 @@ import { useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import styles from "./Tasks.module.css"
-import { addTask, removeTask, selectTaskEntities, type Task } from "./tasksSlice"
-import { randomIdString } from "../../utils/utility-methods";
-import { nanoid } from "@reduxjs/toolkit";
+import {
+  addTask,
+  removeTask,
+  selectTaskEntities,
+  type Task,
+} from "./taskInboxSlice"
+import { randomIdString } from "../../utils/utility-methods"
+import { nanoid } from "@reduxjs/toolkit"
 
-export const Tasks = () => {
-  const dispatch = useAppDispatch();
-  const tasks: Record<string, Task> = useAppSelector(selectTaskEntities);
+export const TaskInbox = () => {
+  const dispatch = useAppDispatch()
+  const tasks: Record<string, Task> = useAppSelector(selectTaskEntities)
 
   const generateBlankTask = (): Task => ({
     id: nanoid(),
@@ -16,18 +21,17 @@ export const Tasks = () => {
     points: 0,
     completed: false,
     removed: false,
-  });
+  })
 
   const handleAddGeneratedTask = () => {
-    const generatedTask = generateBlankTask();
-    dispatch(addTask(generatedTask));
-  };
+    const generatedTask = generateBlankTask()
+    dispatch(addTask(generatedTask))
+  }
 
-  const renderTasks = () => Object.values(tasks).map((taskEntity: Task) => (
-    <div key={taskEntity.id}>
-      {taskEntity.id}
-    </div>
-  ));
+  const renderTasks = () =>
+    Object.values(tasks).map((taskEntity: Task) => (
+      <div key={taskEntity.id}>{taskEntity.id}</div>
+    ))
 
   return (
     <div>
@@ -43,4 +47,4 @@ export const Tasks = () => {
       {renderTasks()}
     </div>
   )
-};
+}
