@@ -1,18 +1,18 @@
 import { type Task } from "../../shared/TaskDef"
-import controlStyles from "../../shared/Controls.module.css"
-import { type ChangeEvent, type PropsWithChildren, useState } from "react"
+import { type ChangeEvent, useState } from "react"
 
 interface InlineTaskInputProps {
   saveTask: (task: Task) => void
+  cancelInput: () => void
   incomingTask: Task
 }
 
 export const InlineTaskInput = ({
   saveTask,
+  cancelInput,
   incomingTask,
 }: InlineTaskInputProps) => {
   const [task, setTask] = useState<Task>(incomingTask)
-  const [isActive, setIsActive] = useState<boolean>(false)
 
   const handleLabelChange = (label: string) => {
     setTask({
@@ -35,7 +35,10 @@ export const InlineTaskInput = ({
             handleLabelChange(e.target.value)
           }
         />
-        <button type="submit" className={controlStyles.button} />
+        <button type="button" onClick={cancelInput}>
+          Cancel
+        </button>
+        <button type="submit">Save</button>
       </form>
     </div>
   )

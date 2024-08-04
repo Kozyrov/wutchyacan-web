@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import controlStyles from "../../shared/Controls.module.css"
 import styles from "./TaskInbox.module.css"
 import { type Task } from "../../shared/TaskDef"
 import { addInboxTask, selectTaskEntities } from "./taskInboxSlice"
@@ -18,6 +17,10 @@ export const TaskInbox = () => {
     dispatch(addInboxTask(task))
   }
 
+  const handleCancelTaskInput = () => {
+    setAddNewTaskInputOpen(false)
+  }
+
   const renderTasks = () =>
     Object.values(tasks).map((taskEntity: Task) => (
       <div key={taskEntity.id}>{taskEntity.id}</div>
@@ -26,7 +29,7 @@ export const TaskInbox = () => {
   return (
     <div>
       <div className={styles.row}>
-        {addNewTaskInputOpen ? (
+        {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
             + Task
           </button>
@@ -34,6 +37,7 @@ export const TaskInbox = () => {
           <InlineTaskInput
             incomingTask={generateBlankTask()}
             saveTask={handleSaveTask}
+            cancelInput={handleCancelTaskInput}
           />
         )}
       </div>
