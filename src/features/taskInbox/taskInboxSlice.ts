@@ -1,58 +1,47 @@
+import { type Task } from "../../shared/TaskDef";
 import { createEntityAdapter, type PayloadAction } from "@reduxjs/toolkit"
 import { createAppSlice } from "../../app/createAppSlice"
-import { type ReduxLoadingStatus } from "../../shared/stateTypes";
+import { type ReduxLoadingStatus } from "../../shared/TaskDef";
 import { type RootState } from "../../app/store";
-// import type { AppThunk } from "../../app/store"
-// import { fetchCount } from "./counterAPI"
 
-export interface Task {
-  id: string;
-  label: string;
-  order?: number;
-  points: number;
-  completed: boolean;
-  removed: boolean;
-}
-
-export interface TasksSliceState {
+export interface TaskInboxSliceState {
   status: ReduxLoadingStatus,
   removedTasks: { [removedId: string]: Task },
 }
 
-const tasksAdapter = createEntityAdapter<Task>({
+const taskInboxAdapter = createEntityAdapter<Task>({
   sortComparer: (a: Task, b: Task) => a.points - b.points
 })
 
 
-const extendedTasksState: TasksSliceState = {
+const extendedTaskInboxState: TaskInboxSliceState = {
   status: "idle",
   removedTasks: {}, 
 }
 
-const initialState = tasksAdapter.getInitialState(extendedTasksState);
+const initialState = taskInboxAdapter.getInitialState(extendedTaskInboxState);
 
 // If you are not using async thunks you can use the standalone `createSlice`.
-export const tasksSlice = createAppSlice({
-  name: "tasks",
+export const taskInboxSlice = createAppSlice({
+  name: "taskInbox",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    addTask: tasksAdapter.addOne,
-    removeTask(state, action: PayloadAction<Task>) {
+    addInboxTask: taskInboxAdapter.addOne,
+    removeInboxTask(state, action: PayloadAction<Task>) {
       state.removedTasks[action.payload.id] = action.payload;
-      tasksAdapter.removeOne(state, action.payload.id);
+      taskInboxAdapter.removeOne(state, action.payload.id);
     },
   },
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
-  selectors: {
-  },
+  selectors: {},
 })
 
 // Action creators are generated for each case reducer function.
-export const { addTask, removeTask } =
-  tasksSlice.actions;
+export const { addInboxTask, removeInboxTask } =
+  taskInboxSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 // export const {  } = tasksSlice.selectors
@@ -64,7 +53,7 @@ export const {
   selectEntities: selectTaskEntities,
   selectAll: selectAllTasks,
   selectTotal: selectTotalTasks,
-} = tasksAdapter.getSelectors((state: RootState) => state.tasks)
+} = taskInboxAdapter.getSelectors((state: RootState) => state.taskInbox)
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
