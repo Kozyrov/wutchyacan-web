@@ -13,11 +13,11 @@ export const TaskInbox = () => {
 
   const [addNewTaskInputOpen, setAddNewTaskInputOpen] = useState<boolean>(false)
 
-  const handleSaveTask = (task: Task) => {
+  const handleSaveNewTask = (task: Task) => {
     dispatch(addInboxTask(task))
   }
 
-  const handleCancelTaskInput = () => {
+  const handleCancelNewTaskInput = () => {
     setAddNewTaskInputOpen(false)
   }
 
@@ -28,6 +28,7 @@ export const TaskInbox = () => {
 
   return (
     <div>
+      {renderTasks()}
       <div className={styles.row}>
         {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
@@ -36,12 +37,11 @@ export const TaskInbox = () => {
         ) : (
           <InlineTaskInput
             incomingTask={generateBlankTask()}
-            saveTask={handleSaveTask}
-            cancelInput={handleCancelTaskInput}
+            saveTask={handleSaveNewTask}
+            cancelInput={handleCancelNewTaskInput}
           />
         )}
       </div>
-      {renderTasks()}
     </div>
   )
 }

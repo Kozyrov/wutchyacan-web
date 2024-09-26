@@ -1,5 +1,5 @@
 import { type Task } from "../../shared/TaskDef"
-import { type ChangeEvent, useState } from "react"
+import { type ChangeEvent, type FormEvent, useState } from "react"
 
 interface InlineTaskInputProps {
   saveTask: (task: Task) => void
@@ -21,13 +21,14 @@ export const InlineTaskInput = ({
     })
   }
 
-  const handleSave = () => {
+  const handleSave = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     saveTask(task)
   }
 
   return (
     <div>
-      <form onSubmit={handleSave}>
+      <form onSubmit={e => handleSave(e)}>
         <input
           name="label"
           value={task.label}
