@@ -1,24 +1,18 @@
-import { useAppDispatch } from "../../app/hooks"
 import { type Task } from "../../shared/TaskDef"
-import { type ChangeEvent, type FormEvent, useState } from "react"
-import { addInboxTask } from "../taskInbox/taskInboxSlice"
+import { type ChangeEvent, useState } from "react"
 
 interface InlineTaskInputProps {
+  saveTask: (task: Task) => void
+  cancelInput: () => void
   incomingTask: Task
 }
 
 export const InlineTaskInput = ({
+  saveTask,
+  cancelInput,
   incomingTask,
 }: InlineTaskInputProps) => {
-  const dispatch = useAppDispatch()
-
   const [task, setTask] = useState<Task>(incomingTask)
-  const [addNewTaskInputOpen, setAddNewTaskInputOpen] = useState<boolean>(false)
-  
-  const closeTaskInput = () => {
-    setTask(incomingTask);
-    setAddNewTaskInputOpen(false)
-  }
 
   const handleLabelChange = (label: string) => {
     setTask({
@@ -27,38 +21,24 @@ export const InlineTaskInput = ({
     })
   }
 
-  const handleSave = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    dispatch(addInboxTask(task));
-    closeTaskInput();
+  const handleSave = () => {
+    saveTask(task)
   }
 
   return (
     <div>
-      <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e)}>
-        {addNewTaskInputOpen ?
-          (
-            <>
-              <input
-                name="label"
-                value={task.label}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleLabelChange(e.target.value)
-                }
-              />
-              <button type="button" onClick={closeTaskInput}>
-                Cancel
-              </button>
-              <button type="submit">Save</button>
-            </>
-          ) :
-          (
-            <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
-              + Task
-            </button>
-          )
-        }
-        
+      <form onSubmit={handleSave}>
+        <input
+          name="label"
+          value={task.label}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            handleLabelChange(e.target.value)
+          }
+        />
+        <button type="button" onClick={cancelInput}>
+          Cancel
+        </button>
+        <button type="submit">Save</button>
       </form>
     </div>
   )

@@ -1,14 +1,25 @@
 import { useState } from "react"
 
-import { useAppSelector } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import styles from "./TaskInbox.module.css"
 import { type Task } from "../../shared/TaskDef"
-import { selectTaskEntities } from "./taskInboxSlice"
+import { addInboxTask, selectTaskEntities } from "./taskInboxSlice"
 import { InlineTaskInput } from "../taskInput/InlineTaskInput"
 import { generateBlankTask } from "../../utils/utility-methods"
 
 export const TaskInbox = () => {
+  const dispatch = useAppDispatch()
   const tasks: Record<string, Task> = useAppSelector(selectTaskEntities)
+
+  const [addNewTaskInputOpen, setAddNewTaskInputOpen] = useState<boolean>(false)
+
+  const handleSaveTask = (task: Task) => {
+    dispatch(addInboxTask(task))
+  }
+
+  const handleCancelTaskInput = () => {
+    setAddNewTaskInputOpen(false)
+  }
 
   const renderTasks = () =>
     Object.values(tasks).map((taskEntity: Task) => (
@@ -17,10 +28,20 @@ export const TaskInbox = () => {
 
   return (
     <div>
-      {renderTasks()}
       <div className={styles.row}>
-        <InlineTaskInput incomingTask={generateBlankTask()} />
+        {!addNewTaskInputOpen ? (
+          <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
+            + Task
+          </button>
+        ) : (
+          <InlineTaskInput
+            incomingTask={generateBlankTask()}
+            saveTask={handleSaveTask}
+            cancelInput={handleCancelTaskInput}
+          />
+        )}
       </div>
+      {renderTasks()}
     </div>
   )
 }
