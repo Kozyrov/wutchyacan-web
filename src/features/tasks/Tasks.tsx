@@ -1,9 +1,7 @@
 import { useState } from "react"
-
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import styles from "./Tasks.module.css"
 import { addTask, removeTask, selectTaskEntities, type Task } from "./tasksSlice"
-import { randomIdString } from "../../utils/utility-methods";
 import { nanoid } from "@reduxjs/toolkit";
 
 export const Tasks = () => {
