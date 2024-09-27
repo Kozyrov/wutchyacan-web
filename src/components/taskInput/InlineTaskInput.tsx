@@ -32,6 +32,7 @@ export const InlineTaskInput = ({
       <form onSubmit={e => handleSave(e)}>
         <input
           name="label"
+          autoFocus
           value={task.label}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleLabelChange(e.target.value)

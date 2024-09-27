@@ -3,8 +3,9 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import styles from './TaskInbox.module.css';
 import {type Task} from '../../shared/TaskDef';
 import {addInboxTask, selectTaskEntities} from './taskInboxSlice';
-import {InlineTaskInput} from '../taskInput/InlineTaskInput';
+import {InlineTaskInput} from '../../components/taskInput/InlineTaskInput';
 import {generateBlankTask} from '../../utils/utility-methods';
+import {TaskList} from '../../components/taskList/TaskList';
 
 export const TaskInbox = () => {
   const dispatch = useAppDispatch();
@@ -14,29 +15,24 @@ export const TaskInbox = () => {
   const [addNewTaskInputOpen, setAddNewTaskInputOpen] =
     useState<boolean>(false);
 
-  const refreshNewTastInput = () => {
+  const refreshNewTaskInput = () => {
     setAddNewTaskInputOpen(false);
     setFreshTask(generateBlankTask());
   };
 
   const handleSaveNewTask = (task: Task) => {
     dispatch(addInboxTask(task));
-    refreshNewTastInput();
+    refreshNewTaskInput();
   };
 
   const handleCancelNewTaskInput = () => {
     setAddNewTaskInputOpen(false);
-    refreshNewTastInput();
+    refreshNewTaskInput();
   };
-
-  const renderTasks = () =>
-    Object.values(tasks).map((taskEntity: Task) => (
-      <div key={taskEntity.id}>{taskEntity.id}</div>
-    ));
 
   return (
     <div>
-      {renderTasks()}
+      <TaskList tasks={tasks} />
       <div className={styles.row}>
         {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
