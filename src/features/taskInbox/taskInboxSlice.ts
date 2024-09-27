@@ -1,29 +1,28 @@
-import { type Task } from "../../shared/TaskDef";
-import { createEntityAdapter, type PayloadAction } from "@reduxjs/toolkit"
-import { createAppSlice } from "../../app/createAppSlice"
-import { type ReduxLoadingStatus } from "../../shared/TaskDef";
-import { type RootState } from "../../app/store";
+import {type Task} from '../../shared/TaskDef';
+import {createEntityAdapter, type PayloadAction} from '@reduxjs/toolkit';
+import {createAppSlice} from '../../app/createAppSlice';
+import {type ReduxLoadingStatus} from '../../shared/TaskDef';
+import {type RootState} from '../../app/store';
 
 export interface TaskInboxSliceState {
-  status: ReduxLoadingStatus,
-  removedTasks: { [removedId: string]: Task },
+  status: ReduxLoadingStatus;
+  removedTasks: {[removedId: string]: Task};
 }
 
 const taskInboxAdapter = createEntityAdapter<Task>({
-  sortComparer: (a: Task, b: Task) => a.points - b.points
-})
-
+  sortComparer: (a: Task, b: Task) => a.points - b.points,
+});
 
 const extendedTaskInboxState: TaskInboxSliceState = {
-  status: "idle",
-  removedTasks: {}, 
-}
+  status: 'idle',
+  removedTasks: {},
+};
 
 const initialState = taskInboxAdapter.getInitialState(extendedTaskInboxState);
 
 // If you are not using async thunks you can use the standalone `createSlice`.
 export const taskInboxSlice = createAppSlice({
-  name: "taskInbox",
+  name: 'taskInbox',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
@@ -37,11 +36,10 @@ export const taskInboxSlice = createAppSlice({
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
   selectors: {},
-})
+});
 
 // Action creators are generated for each case reducer function.
-export const { addInboxTask, removeInboxTask } =
-  taskInboxSlice.actions;
+export const {addInboxTask, removeInboxTask} = taskInboxSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 // export const {  } = tasksSlice.selectors
@@ -53,7 +51,7 @@ export const {
   selectEntities: selectTaskEntities,
   selectAll: selectAllTasks,
   selectTotal: selectTotalTasks,
-} = taskInboxAdapter.getSelectors((state: RootState) => state.taskInbox)
+} = taskInboxAdapter.getSelectors((state: RootState) => state.taskInbox);
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

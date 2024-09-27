@@ -1,10 +1,10 @@
-import { type Task } from "../../shared/TaskDef"
-import { type ChangeEvent, type FormEvent, useState } from "react"
+import {type Task} from '../../shared/TaskDef';
+import {type ChangeEvent, type FormEvent, useState} from 'react';
 
 interface InlineTaskInputProps {
-  saveTask: (task: Task) => void
-  cancelInput: () => void
-  incomingTask: Task
+  saveTask: (task: Task) => void;
+  cancelInput: () => void;
+  incomingTask: Task;
 }
 
 export const InlineTaskInput = ({
@@ -12,19 +12,19 @@ export const InlineTaskInput = ({
   cancelInput,
   incomingTask,
 }: InlineTaskInputProps) => {
-  const [task, setTask] = useState<Task>(incomingTask)
+  const [task, setTask] = useState<Task>(incomingTask);
 
   const handleLabelChange = (label: string) => {
     setTask({
       ...task,
       label,
-    })
-  }
+    });
+  };
 
   const handleSave = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    saveTask(task)
-  }
+    e.preventDefault();
+    saveTask(task);
+  };
 
   return (
     <div>
@@ -42,5 +42,5 @@ export const InlineTaskInput = ({
         <button type="submit">Save</button>
       </form>
     </div>
-  )
-}
+  );
+};

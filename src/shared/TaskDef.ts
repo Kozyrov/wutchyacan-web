@@ -6,4 +6,4 @@ export interface Task {
   completed: boolean;
   removed: boolean;
 }
-export type ReduxLoadingStatus = "idle" | "loading" | "failed";
+export type ReduxLoadingStatus = 'idle' | 'loading' | 'failed';

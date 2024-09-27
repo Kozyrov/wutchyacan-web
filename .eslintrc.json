@@ -1,13 +1,6 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:n/recommended",
-    "prettier"
-  ],
-  "plugins": [
-    "n",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:n/recommended", "prettier"],
+  "plugins": ["n", "prettier"],
   "rules": {
     "prettier/prettier": "error",
     "block-scoped-var": "error",
@@ -17,7 +10,7 @@
     "eol-last": "error",
     "prefer-arrow-callback": "error",
     "no-trailing-spaces": "error",
-    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "quotes": ["warn", "single", {"avoidEscape": true}],
     "no-restricted-properties": [
       "error",
       {
@@ -34,9 +27,7 @@
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "parser": "@typescript-eslint/parser",
-      "extends": [
-        "plugin:@typescript-eslint/recommended"
-      ],
+      "extends": ["plugin:@typescript-eslint/recommended"],
       "rules": {
         "@typescript-eslint/ban-ts-comment": "warn",
         "@typescript-eslint/no-non-null-assertion": "off",

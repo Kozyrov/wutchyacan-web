@@ -1,5 +1,5 @@
-import "./App.css"
-import { TaskInbox } from "./features/taskInbox/TaskInbox"
+import './App.css';
+import {TaskInbox} from './features/taskInbox/TaskInbox';
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
         <TaskInbox />
       </header>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
