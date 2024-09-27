@@ -1,5 +1,4 @@
-import {useState} from 'react';
-
+import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import styles from './TaskInbox.module.css';
 import {type Task} from '../../shared/TaskDef';
@@ -10,16 +9,24 @@ import {generateBlankTask} from '../../utils/utility-methods';
 export const TaskInbox = () => {
   const dispatch = useAppDispatch();
   const tasks: Record<string, Task> = useAppSelector(selectTaskEntities);
+  const [freshTask, setFreshTask] = useState<Task>(generateBlankTask());
 
   const [addNewTaskInputOpen, setAddNewTaskInputOpen] =
     useState<boolean>(false);
 
+  const refreshNewTastInput = () => {
+    setAddNewTaskInputOpen(false);
+    setFreshTask(generateBlankTask());
+  };
+
   const handleSaveNewTask = (task: Task) => {
     dispatch(addInboxTask(task));
+    refreshNewTastInput();
   };
 
   const handleCancelNewTaskInput = () => {
     setAddNewTaskInputOpen(false);
+    refreshNewTastInput();
   };
 
   const renderTasks = () =>
@@ -37,7 +44,7 @@ export const TaskInbox = () => {
           </button>
         ) : (
           <InlineTaskInput
-            incomingTask={generateBlankTask()}
+            incomingTask={freshTask}
             saveTask={handleSaveNewTask}
             cancelInput={handleCancelNewTaskInput}
           />

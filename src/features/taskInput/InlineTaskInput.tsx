@@ -1,3 +1,4 @@
+import React from 'react';
 import {type Task} from '../../shared/TaskDef';
 import {type ChangeEvent, type FormEvent, useState} from 'react';
 
