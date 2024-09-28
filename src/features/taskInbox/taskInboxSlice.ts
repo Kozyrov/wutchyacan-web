@@ -32,6 +32,7 @@ export const taskInboxSlice = createAppSlice({
       state.removedTasks[action.payload.id] = action.payload;
       taskInboxAdapter.removeOne(state, action.payload.id);
     },
+    deleteInboxTask: taskInboxAdapter.removeOne,
   },
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
@@ -39,7 +40,7 @@ export const taskInboxSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const {addInboxTask, removeInboxTask} = taskInboxSlice.actions;
+export const {addInboxTask, removeInboxTask, deleteInboxTask} = taskInboxSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 // export const {  } = tasksSlice.selectors
