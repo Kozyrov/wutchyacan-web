@@ -4,10 +4,12 @@ import {TaskInbox} from './features/taskInbox/TaskInbox';
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <TaskInbox />
+    <div id="watchucan_web_app">
+      <header>
       </header>
+      <div className="">
+        <TaskInbox />
+      </div>
     </div>
   );
 };

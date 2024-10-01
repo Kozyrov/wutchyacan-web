@@ -17,7 +17,7 @@ export const TaskListItemPresenter = ({task}: TaskListItemPresenterProps) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-row">
       <div id={task.id}>{task.label}</div>
       <button type="button" onClick={toggleContextMenu}>
         ***

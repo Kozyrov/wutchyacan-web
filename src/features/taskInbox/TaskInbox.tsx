@@ -33,7 +33,7 @@ export const TaskInbox = () => {
   return (
     <div>
       <TaskList tasks={tasks} />
-      <div className={styles.row}>
+      <div className="flex-row">
         {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
             + Task
