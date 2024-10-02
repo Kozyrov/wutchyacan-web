@@ -33,6 +33,7 @@ export const taskInboxSlice = createAppSlice({
       taskInboxAdapter.removeOne(state, action.payload.id);
     },
     deleteInboxTask: taskInboxAdapter.removeOne,
+    updateInboxTask: taskInboxAdapter.updateOne,
   },
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.

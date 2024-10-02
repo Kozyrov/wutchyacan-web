@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import { Task } from '../../shared/TaskDef';
-import { TaskContextMenu } from '../taskContextMenu/TaskContextMenu';
+import { TaskContextMenu } from '../../../taskContextMenu/TaskContextMenu';
+import { Task } from '../../../../shared/TaskDef';
 
-interface TaskListItemPresenterProps {
+interface TaskListItemControlProps {
   task: Task;
+  toggleEdit: () => void;
 }
 
-export const TaskListItemPresenter = ({ task }: TaskListItemPresenterProps) => {
+export const TaskListItemControls = ({
+  toggleEdit,
+  task,
+}: TaskListItemControlProps) => {
   const [contextMenuVisibility, setContextMenuVisibility] =
     useState<boolean>(false);
 
   const toggleContextMenu = () => {
     setContextMenuVisibility(true);
   };
-
   return (
-    <div className="flex flex-row">
-      <div id={task.id}>{task.label}</div>
+    <div>
+      <button onClick={toggleEdit}>edit</button>
       <button type="button" onClick={toggleContextMenu}>
         ***
       </button>

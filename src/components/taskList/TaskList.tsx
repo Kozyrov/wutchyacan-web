@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Task } from '../../shared/TaskDef';
-import { TaskListItem } from '../taskListItem/TaskListItem';
+import { TaskListItem } from './taskListItem/TaskListItem';
 import { generateUniqueIteratorKey } from '../../utils/utility-methods';
 
 interface TaskList {
