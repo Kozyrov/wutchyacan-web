@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../app/hooks';
-import styles from './TaskInbox.module.css';
-import {type Task} from '../../shared/TaskDef';
-import {addInboxTask, selectTaskEntities} from './taskInboxSlice';
-import {InlineTaskInput} from '../../components/taskInput/InlineTaskInput';
-import {generateBlankTask} from '../../utils/utility-methods';
-import {TaskList} from '../../components/taskList/TaskList';
+import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { type Task } from '../../shared/TaskDef';
+import { addInboxTask, selectTaskEntities } from './taskInboxSlice';
+import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
+import { generateBlankTask } from '../../utils/utility-methods';
+import { TaskList } from '../../components/taskList/TaskList';
 
 export const TaskInbox = () => {
   const dispatch = useAppDispatch();

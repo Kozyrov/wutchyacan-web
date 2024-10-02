@@ -1,19 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Task} from '../../shared/TaskDef';
-import {TaskContextMenu} from '../taskContextMenu/TaskContextMenu';
+import React, { useState } from 'react';
+import { Task } from '../../shared/TaskDef';
+import { TaskContextMenu } from '../taskContextMenu/TaskContextMenu';
 
 interface TaskListItemPresenterProps {
   task: Task;
 }
 
-export const TaskListItemPresenter = ({task}: TaskListItemPresenterProps) => {
+export const TaskListItemPresenter = ({ task }: TaskListItemPresenterProps) => {
   const [contextMenuVisibility, setContextMenuVisibility] =
     useState<boolean>(false);
 
-  const menuRef = useRef<HTMLDivElement>(null);
-
   const toggleContextMenu = () => {
-    setContextMenuVisibility(!contextMenuVisibility);
+    setContextMenuVisibility(true);
   };
 
   return (
@@ -24,9 +22,8 @@ export const TaskListItemPresenter = ({task}: TaskListItemPresenterProps) => {
       </button>
       {contextMenuVisibility && (
         <TaskContextMenu
-          ref={menuRef}
           task={task}
-          close={() => setContextMenuVisibility(false)}
+          closeMenu={() => setContextMenuVisibility(false)}
         />
       )}
     </div>

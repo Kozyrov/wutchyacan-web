@@ -1,43 +1,43 @@
-import React, {forwardRef, useEffect} from 'react';
-import {Task} from '../../shared/TaskDef';
-import {useAppDispatch} from '../../app/hooks';
-import {deleteInboxTask} from '../../features/taskInbox/taskInboxSlice';
+import React, { useEffect, useRef } from 'react';
+import { Task } from '../../shared/TaskDef';
+import { useAppDispatch } from '../../app/hooks';
+import { deleteInboxTask } from '../../features/taskInbox/taskInboxSlice';
 
 interface TaskContextMenuProps {
   task: Task;
-  close: () => void;
+  closeMenu: () => void;
 }
 
-export const TaskContextMenu = forwardRef<HTMLDivElement, TaskContextMenuProps>(
-  ({task}: TaskContextMenuProps, menuRef) => {
-    const dispatch = useAppDispatch();
+export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-        if (!menuRef) return;
-        if (menuRef.current && !menuRef.current.contains(event.target as Node))
-          close();
-      };
+  const menuRef = useRef<HTMLDivElement>(null);
 
-      document.addEventListener('click', handleClickOutside);
-      return () => {
-        document.removeEventListener('click', handleClickOutside);
-      };
-    }, []);
-
-    const handleDeleteTask = () => {
-      dispatch(deleteInboxTask(task.id));
-      close();
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (menuRef?.current && !menuRef.current.contains(event.target as Node)) {
+        closeMenu();
+      }
     };
 
-    return (
-      <div ref={menuRef}>
-        <button type="button" onClick={handleDeleteTask}>
-          Delete
-        </button>
-      </div>
-    );
-  }
-);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleDeleteTask = () => {
+    dispatch(deleteInboxTask(task.id));
+    closeMenu();
+  };
+
+  return (
+    <div ref={menuRef}>
+      <button type="button" onClick={handleDeleteTask}>
+        Delete
+      </button>
+    </div>
+  );
+};
 
 TaskContextMenu.displayName = 'TaskContextMenu';

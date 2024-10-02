@@ -1,5 +1,5 @@
-import {nanoid} from '@reduxjs/toolkit';
-import {type Task} from '../shared/TaskDef';
+import { nanoid } from '@reduxjs/toolkit';
+import { type Task } from '../shared/TaskDef';
 
 export const generateUniqueIteratorKey = () =>
   (Date.now() + Math.random()).toString();

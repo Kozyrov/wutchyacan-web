@@ -1,12 +1,12 @@
-import {type Task} from '../../shared/TaskDef';
-import {createEntityAdapter, type PayloadAction} from '@reduxjs/toolkit';
-import {createAppSlice} from '../../app/createAppSlice';
-import {type ReduxLoadingStatus} from '../../shared/TaskDef';
-import {type RootState} from '../../app/store';
+import { type Task } from '../../shared/TaskDef';
+import { createEntityAdapter, type PayloadAction } from '@reduxjs/toolkit';
+import { createAppSlice } from '../../app/createAppSlice';
+import { type ReduxLoadingStatus } from '../../shared/TaskDef';
+import { type RootState } from '../../app/store';
 
 export interface TaskInboxSliceState {
   status: ReduxLoadingStatus;
-  removedTasks: {[removedId: string]: Task};
+  removedTasks: { [removedId: string]: Task };
 }
 
 const taskInboxAdapter = createEntityAdapter<Task>({
@@ -40,7 +40,8 @@ export const taskInboxSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const {addInboxTask, removeInboxTask, deleteInboxTask} = taskInboxSlice.actions;
+export const { addInboxTask, removeInboxTask, deleteInboxTask } =
+  taskInboxSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 // export const {  } = tasksSlice.selectors
