@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TaskContextMenu } from '../../../taskContextMenu/TaskContextMenu';
-import { Task } from '../../../../shared/TaskDef';
+import { Task } from '../../../../app/types';
 
 interface TaskListItemControlProps {
   task: Task;

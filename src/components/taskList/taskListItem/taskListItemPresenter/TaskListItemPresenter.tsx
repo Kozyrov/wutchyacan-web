@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task } from '../../../../shared/TaskDef';
+import { Task } from '../../../../app/types';
 
 interface TaskListItemPresenterProps {
   task: Task;

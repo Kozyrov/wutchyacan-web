@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { type Task } from '../../../shared/TaskDef';
+import { type Task } from '../../../app/types';
 import { TaskListItemPresenter } from './taskListItemPresenter/TaskListItemPresenter';
 import { TaskListItemControls } from './taskListItemControls/TaskListItemControls';
 import { TaskListItemInlineEditor } from './taskListItemInlineEditor/TaskListItemInlineEditor';

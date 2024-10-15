@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { Task } from '../../shared/TaskDef';
+import { Task } from '../../app/types';
 import { useAppDispatch } from '../../app/hooks';
-import { deleteInboxTask } from '../../features/taskInbox/taskInboxSlice';
+import { deleteTask } from '../../entities/task/taskSlice';
 
 interface TaskContextMenuProps {
   task: Task;
@@ -27,7 +27,7 @@ export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
   }, []);
 
   const handleDeleteTask = () => {
-    dispatch(deleteInboxTask(task.id));
+    dispatch(deleteTask(task.id));
     closeMenu();
   };
 

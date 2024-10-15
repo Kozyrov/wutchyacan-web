@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Task } from '../../shared/TaskDef';
+import type { Task } from '../../app/types';
 import { TaskListItem } from './taskListItem/TaskListItem';
 import { generateUniqueIteratorKey } from '../../utils/utility-methods';
 

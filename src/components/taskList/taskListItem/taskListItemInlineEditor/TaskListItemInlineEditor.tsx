@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Task } from '../../../../shared/TaskDef';
+import { Task } from '../../../../app/types';
 
 interface TaskListItemInlineEditorProps {
   task: Task;

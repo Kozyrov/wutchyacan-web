@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { type Task } from '../../shared/TaskDef';
-import { addInboxTask, selectTaskEntities } from './taskInboxSlice';
+import { type Task } from '../../app/types';
+import { addTask, selectTaskEntities } from '../../entities/task/taskSlice';
 import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
@@ -20,7 +20,7 @@ export const TaskInbox = () => {
   };
 
   const handleSaveNewTask = (task: Task) => {
-    dispatch(addInboxTask(task));
+    dispatch(addTask(task));
     refreshNewTaskInput();
   };
 
