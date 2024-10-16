@@ -4,11 +4,11 @@ export interface Task {
   order?: number;
   points: number;
   completed: boolean;
-  removed: boolean;
 }
 
 export interface List {
   id: string;
   name: string;
+  members: string[];
 }
 export type ReduxLoadingStatus = 'idle' | 'loading' | 'failed';

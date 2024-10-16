@@ -31,7 +31,6 @@ export const taskSlice = createAppSlice({
     },
     deleteTask: taskAdapter.removeOne,
     updateTask: taskAdapter.updateOne,
-
   },
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
@@ -39,7 +38,7 @@ export const taskSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const { addTask, removeTask, deleteTask } =
+export const { addTask, removeTask, deleteTask, updateTask } =
   taskSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
@@ -48,10 +47,7 @@ export const { addTask, removeTask, deleteTask } =
 // Rename the exports for readability in component usage
 export const {
   selectById: selectTaskById,
-  selectIds: selectTaskIds,
   selectEntities: selectTaskEntities,
-  selectAll: selectAllTasks,
-  selectTotal: selectTotalTasks,
 } = taskAdapter.getSelectors((state: RootState) => state.task);
 
 // We can also write thunks by hand, which may contain both sync and async logic.
@@ -65,3 +61,5 @@ export const {
 //       dispatch(incrementByAmount(amount))
 //     }
 //   }
+
+export default taskSlice.reducer;

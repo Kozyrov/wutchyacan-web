@@ -28,8 +28,8 @@ export const InlineTaskInput = ({
   };
 
   return (
-    <div>
-      <form onSubmit={e => handleSave(e)}>
+    <div data-testid="inline-task-input">
+      <form onSubmit={e => handleSave(e)} data-testid="inline-task-input-form">
         <input
           name="label"
           autoFocus

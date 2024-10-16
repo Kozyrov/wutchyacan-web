@@ -8,5 +8,4 @@ export const generateBlankTask = (): Task => ({
   label: '',
   points: 0,
   completed: false,
-  removed: false,
 });

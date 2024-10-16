@@ -13,5 +13,5 @@ export const TaskList = ({ tasks }: TaskList) => {
       <TaskListItem key={generateUniqueIteratorKey()} task={taskEntity} />
     ));
 
-  return <div>{renderTasks()}</div>;
+  return <div data-testid="task-list">{renderTasks()}</div>;
 };

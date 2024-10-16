@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { type Task } from '../../app/types';
-import { addTask, selectTaskEntities } from '../../entities/task/taskSlice';
+import { addTask, selectTaskEntities } from '../../entities/Task/taskSlice';
 import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
@@ -30,7 +30,7 @@ export const TaskInbox = () => {
   };
 
   return (
-    <div>
+    <div data-testid="task-inbox">
       <TaskList tasks={tasks} />
       <div className="flex-row">
         {!addNewTaskInputOpen ? (

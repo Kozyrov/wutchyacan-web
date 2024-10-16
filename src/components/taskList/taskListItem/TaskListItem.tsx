@@ -1,7 +1,6 @@
 import React, { memo, useState } from 'react';
 import { type Task } from '../../../app/types';
-import { TaskListItemPresenter } from './taskListItemPresenter/TaskListItemPresenter';
-import { TaskListItemControls } from './taskListItemControls/TaskListItemControls';
+import { TaskContextMenu } from '../../taskContextMenu/TaskContextMenu';
 import { TaskListItemInlineEditor } from './taskListItemInlineEditor/TaskListItemInlineEditor';
 
 interface TaskListItemProps {
@@ -11,20 +10,37 @@ interface TaskListItemProps {
 export const TaskListItem = memo(({ task }: TaskListItemProps) => {
   const [editState, setEditState] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(false);
+  const [contextMenuVisibility, setContextMenuVisibility] =
+    useState<boolean>(false);
+
   return (
-    <div>
+    <div data-testid="task-list-item">
       {!editState ? (
         <div
           className="flex"
           onMouseEnter={() => setShowControls(true)}
           onMouseLeave={() => setShowControls(false)}
+          data-testid="task-list-item-container"
         >
-          <TaskListItemPresenter task={task} />
+          <div className="flex flex-row">
+            <div id={task.id}>{task.label}</div>
+          </div>
           {showControls && (
-            <TaskListItemControls
-              task={task}
-              toggleEdit={() => setEditState(true)}
-            />
+            <div data-testid="task-list-item-controls">
+              <button onClick={() => setEditState(true)}>edit</button>
+              <button
+                type="button"
+                onClick={() => setContextMenuVisibility(!contextMenuVisibility)}
+              >
+                ***
+              </button>
+              {contextMenuVisibility && (
+                <TaskContextMenu
+                  task={task}
+                  closeMenu={() => setContextMenuVisibility(false)}
+                />
+              )}
+            </div>
           )}
         </div>
       ) : (

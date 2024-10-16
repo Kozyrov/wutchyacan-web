@@ -13,7 +13,7 @@ export const TaskListItemInlineEditor = ({
   const [label, setLabel] = useState<string>(task.label);
 
   return (
-    <div>
+    <div data-testid="task-list-item-inline-editor">
       <input
         type="text"
         value={label}

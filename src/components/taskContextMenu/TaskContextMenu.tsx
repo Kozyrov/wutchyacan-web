@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Task } from '../../app/types';
 import { useAppDispatch } from '../../app/hooks';
-import { deleteTask } from '../../entities/task/taskSlice';
+import { deleteTask } from '../../entities/Task/taskSlice';
 
 interface TaskContextMenuProps {
   task: Task;
@@ -32,7 +32,7 @@ export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
   };
 
   return (
-    <div ref={menuRef}>
+    <div ref={menuRef} data-testid="task-context-menu">
       <button type="button" onClick={handleDeleteTask}>
         Delete
       </button>
