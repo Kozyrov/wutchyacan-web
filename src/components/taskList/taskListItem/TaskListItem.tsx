@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { type Task } from '../../../app/types';
 import { TaskContextMenu } from '../../taskContextMenu/TaskContextMenu';
-import { TaskListItemInlineEditor } from './taskListItemInlineEditor/TaskListItemInlineEditor';
+import { InlineTaskInput } from '../../taskInput/InlineTaskInput';
 
 interface TaskListItemProps {
   task: Task;
@@ -44,9 +44,9 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
           )}
         </div>
       ) : (
-        <TaskListItemInlineEditor
-          task={task}
-          onCancel={() => setEditState(false)}
+        <InlineTaskInput
+          incomingTask={task}
+          closeInput={() => setEditState(false)}
         />
       )}
     </div>

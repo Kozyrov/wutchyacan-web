@@ -8,9 +8,9 @@ import {
   selectListById,
   initialListState,
 } from './listSlice';
-import { List } from '../../app/types';
+import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
-import { taskSlice } from '../Task/taskSlice';
+import { addTask, taskSlice } from '../Task/taskSlice';
 
 // src/entities/List/listSlice.test.ts
 
@@ -26,6 +26,14 @@ describe('listSlice', () => {
     id: '1',
     name: 'Updated Test List',
     members: ['member2'],
+  };
+
+  const newTask: Task = {
+    id: '101',
+    label: 'newMember',
+    points: 0,
+    list: listItem.id,
+    completed: false,
   };
 
   const rootReducer = combineSlices(listSlice, taskSlice);
@@ -93,6 +101,13 @@ describe('listSlice', () => {
       state.list.entities[listItem.id]?.members[0] === listItem.members[0]
     );
   });
+
+  it('should add tasks to specified list when addTask action received', () => {
+    store.dispatch(addList(listItem));
+    store.dispatch(addTask(newTask));
+    const state = store.getState() as RootState;
+    expect(state.list.entities[listItem.id]?.members).toContain(newTask.id);
+  })
 
   it('should select list by id', () => {
     store.dispatch(addList(listItem));

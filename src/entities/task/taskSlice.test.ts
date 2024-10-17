@@ -9,9 +9,9 @@ import {
   selectTaskById,
   selectTaskEntities,
 } from './taskSlice';
-import { Task } from '../../app/types';
+import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
-import { listSlice } from '../List/listSlice';
+import { addList, listSlice } from '../List/listSlice';
 
 // src/entities/Task/taskSlice.test.ts
 
@@ -22,6 +22,13 @@ describe('taskSlice', () => {
     label: 'Test Task',
     points: 0,
     completed: false,
+    list: '101',
+  };
+
+  const listItem: List = {
+    id: '101',
+    name: 'Test List',
+    members: [],
   };
 
   const updatedTaskItem: Task = {
@@ -29,6 +36,7 @@ describe('taskSlice', () => {
     label: 'Updated Test Task',
     points: 1,
     completed: true,
+    list: '101',
   };
 
   const rootReducer = combineSlices(taskSlice, listSlice);
@@ -45,6 +53,7 @@ describe('taskSlice', () => {
   });
 
   it('should handle addTask', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     const state = store.getState() as RootState;
     expect(state.task.ids).toContain(taskItem.id);
@@ -52,6 +61,7 @@ describe('taskSlice', () => {
   });
 
   it('should handle removeTask', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     store.dispatch(removeTask(taskItem));
     const state = store.getState() as RootState;
@@ -61,6 +71,7 @@ describe('taskSlice', () => {
   });
 
   it('should handle deleteTask', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     store.dispatch(deleteTask(taskItem.id));
     const state = store.getState() as RootState;
@@ -69,6 +80,7 @@ describe('taskSlice', () => {
   });
 
   it('should handle updateTask', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     store.dispatch(
       updateTask({
@@ -93,6 +105,7 @@ describe('taskSlice', () => {
   });
 
   it('should select task by id', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     const state = store.getState() as RootState;
     const selectedTask = selectTaskById(state, taskItem.id);
@@ -100,6 +113,7 @@ describe('taskSlice', () => {
   });
 
   it('should select all tasks', () => {
+    store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
     const state = store.getState() as RootState;
     const selectedTasks = selectTaskEntities(state);

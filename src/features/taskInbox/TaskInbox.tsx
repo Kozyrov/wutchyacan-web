@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { type Task } from '../../app/types';
-import { addTask, selectTaskEntities } from '../../entities/Task/taskSlice';
+import { selectTaskEntities } from '../../entities/Task/taskSlice';
 import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
 
 export const TaskInbox = () => {
-  const dispatch = useAppDispatch();
   const tasks: Record<string, Task> = useAppSelector(selectTaskEntities);
   const [freshTask, setFreshTask] = useState<Task>(generateBlankTask());
 
@@ -17,11 +16,6 @@ export const TaskInbox = () => {
   const refreshNewTaskInput = () => {
     setAddNewTaskInputOpen(false);
     setFreshTask(generateBlankTask());
-  };
-
-  const handleSaveNewTask = (task: Task) => {
-    dispatch(addTask(task));
-    refreshNewTaskInput();
   };
 
   const handleCancelNewTaskInput = () => {
@@ -40,8 +34,7 @@ export const TaskInbox = () => {
         ) : (
           <InlineTaskInput
             incomingTask={freshTask}
-            saveTask={handleSaveNewTask}
-            cancelInput={handleCancelNewTaskInput}
+            closeInput={handleCancelNewTaskInput}
           />
         )}
       </div>

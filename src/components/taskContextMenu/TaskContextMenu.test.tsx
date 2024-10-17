@@ -20,6 +20,7 @@ describe('TaskContextMenu', () => {
     label: 'Test Task',
     completed: false,
     points: 0,
+    list: 'inbox',
   };
 
   const closeMenu = vi.fn();

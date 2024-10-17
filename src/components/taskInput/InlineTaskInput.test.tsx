@@ -3,27 +3,48 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { InlineTaskInput } from './InlineTaskInput';
 import { Task } from '../../app/types';
+import { Provider } from 'react-redux';
+import { addTask } from '../../entities/Task/taskSlice';
+import { makeStore, RootState } from '../../app/store';
 
 // src/components/taskInput/inlineTaskInput/InlineTaskInput.test.tsx
+const dispatch = vi.fn();
+
+vi.mock('../../app/hooks', () => ({
+  useAppDispatch: () => dispatch,
+}));
 
 describe('InlineTaskInput', () => {
-  const task: Task = {
+  const taskStub: Task = {
     id: '1',
     label: 'Test Task',
     completed: false,
     points: 0,
+    list: '00',
   };
 
-  const saveTask = vi.fn();
-  const cancelInput = vi.fn();
+  const mockCloseInput = vi.fn();
+
+  const preloadedState: Partial<RootState> = {
+    list: {
+      entities: {
+        '00': {
+          id: '00',
+          name: 'inbox',
+          members: ['member1'],
+        },
+      },
+      ids: ['00'],
+    },
+  };
+
+  const storeMock = makeStore(preloadedState);
 
   const renderComponent = () => {
     return render(
-      <InlineTaskInput
-        saveTask={saveTask}
-        cancelInput={cancelInput}
-        incomingTask={task}
-      />
+      <Provider store={storeMock}>
+        <InlineTaskInput closeInput={mockCloseInput} incomingTask={taskStub} />
+      </Provider>
     );
   };
 
@@ -40,26 +61,18 @@ describe('InlineTaskInput', () => {
     expect(input).toHaveValue('Updated Task');
   });
 
-  it('should call saveTask on form submit', () => {
+  it('should dispatch addTask and call closeInput when submitted', () => {
     renderComponent();
     const form = screen.getByTestId('inline-task-input-form');
     fireEvent.submit(form);
-    expect(saveTask).toHaveBeenCalledWith({ ...task, label: 'Test Task' });
+    expect(dispatch).toHaveBeenCalledWith(addTask(taskStub));
+    expect(mockCloseInput).toHaveBeenCalled();
   });
 
   it('should call cancelInput when Cancel button is clicked', () => {
     renderComponent();
     const cancelButton = screen.getByText('Cancel');
     fireEvent.click(cancelButton);
-    expect(cancelInput).toHaveBeenCalled();
-  });
-
-  it('should call saveTask with updated task on form submit', () => {
-    renderComponent();
-    const input = screen.getByDisplayValue('Test Task');
-    fireEvent.change(input, { target: { value: 'Updated Task' } });
-    const form = screen.getByTestId('inline-task-input-form');
-    fireEvent.submit(form);
-    expect(saveTask).toHaveBeenCalledWith({ ...task, label: 'Updated Task' });
+    expect(mockCloseInput).toHaveBeenCalled();
   });
 });

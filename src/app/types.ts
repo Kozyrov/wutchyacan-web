@@ -3,6 +3,7 @@ export interface Task {
   label: string;
   order?: number;
   points: number;
+  list: string;
   completed: boolean;
 }
 

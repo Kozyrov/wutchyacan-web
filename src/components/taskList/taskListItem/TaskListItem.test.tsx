@@ -15,6 +15,7 @@ describe('TaskListItem', () => {
     id: '1',
     label: 'Test Task',
     points: 0,
+    list: 'inbox',
     completed: false,
   };
 

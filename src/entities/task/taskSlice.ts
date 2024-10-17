@@ -15,13 +15,13 @@ const extendedTaskState: TaskSliceState = {
   removedTasks: {},
 };
 
-const initialState = taskAdapter.getInitialState(extendedTaskState);
+export const initialTaskState = taskAdapter.getInitialState(extendedTaskState);
 
 // If you are not using async thunks you can use the standalone `createSlice`.
 export const taskSlice = createAppSlice({
   name: 'task',
   // `createSlice` will infer the state type from the `initialState` argument
-  initialState,
+  initialState: initialTaskState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addTask: taskAdapter.addOne,
