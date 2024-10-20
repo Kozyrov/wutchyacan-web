@@ -1,16 +1,15 @@
 import React from 'react';
 import type { Task } from '../../app/types';
 import { TaskListItem } from './taskListItem/TaskListItem';
-import { generateUniqueIteratorKey } from '../../utils/utility-methods';
 
 interface TaskList {
-  tasks: Record<string, Task>;
+  tasks: Task[];
 }
 
 export const TaskList = ({ tasks }: TaskList) => {
   const renderTasks = () =>
-    Object.values(tasks).map((taskEntity: Task) => (
-      <TaskListItem key={generateUniqueIteratorKey()} task={taskEntity} />
+    tasks.map((taskEntity: Task) => (
+      <TaskListItem key={taskEntity.id} task={taskEntity} />
     ));
 
   return <div data-testid="task-list">{renderTasks()}</div>;

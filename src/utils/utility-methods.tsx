@@ -3,9 +3,10 @@ import { type Task } from '../app/types';
 
 export const generateUniqueIteratorKey = () =>
   (Date.now() + Math.random()).toString();
-export const generateBlankTask = (): Task => ({
+export const generateBlankTask = (listId: string): Task => ({
   id: nanoid(),
   label: '',
   points: 0,
+  list: listId,
   completed: false,
 });

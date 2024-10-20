@@ -7,19 +7,21 @@ import { taskSlice } from '../../entities/Task/taskSlice';
 import { listSlice } from '../../entities/List/listSlice';
 import { Task } from '../../app/types';
 import { TaskList } from './TaskList';
+import { inboxId } from '../../app/constants';
 
 // src/components/taskList/TaskList.test.tsx
 
 describe('TaskList', () => {
   let store: ReturnType<typeof configureStore>;
-  const tasks: Record<string, Task> = {
-    '1': {
+  const tasks: Task[] = [
+    {
       id: '1',
       label: 'Test Task',
       points: 0,
+      list: inboxId,
       completed: false,
     },
-  };
+  ];
 
   const rootReducer = combineSlices(taskSlice, listSlice);
 

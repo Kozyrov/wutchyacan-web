@@ -6,6 +6,7 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { taskSlice } from '../../../entities/Task/taskSlice';
 import { listSlice } from '../../../entities/List/listSlice';
 import { TaskListItem } from './TaskListItem';
+import { inboxId } from '../../../app/constants';
 
 // src/components/taskList/taskListItem/TaskListItem.test.tsx
 
@@ -15,7 +16,7 @@ describe('TaskListItem', () => {
     id: '1',
     label: 'Test Task',
     points: 0,
-    list: 'inbox',
+    list: inboxId,
     completed: false,
   };
 
@@ -58,9 +59,7 @@ describe('TaskListItem', () => {
     fireEvent.mouseEnter(taskItemElement);
     const editButton = screen.getByText('edit');
     fireEvent.click(editButton);
-    expect(
-      screen.getByTestId('task-list-item-inline-editor')
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('inline-task-input')).toBeInTheDocument();
   });
 
   it('should display context menu on click', () => {

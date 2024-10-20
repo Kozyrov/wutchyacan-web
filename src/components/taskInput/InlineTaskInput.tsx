@@ -1,8 +1,8 @@
 import React from 'react';
 import { type Task } from '../../app/types';
 import { type ChangeEvent, type FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { addTask } from '../../entities/Task/taskSlice';
+import { useAppDispatch } from '../../app/hooks';
 
 interface InlineTaskInputProps {
   closeInput: () => void;
@@ -13,7 +13,7 @@ export const InlineTaskInput = ({
   closeInput,
   incomingTask,
 }: InlineTaskInputProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [task, setTask] = useState<Task>(incomingTask);
 
   const handleLabelChange = (label: string) => {

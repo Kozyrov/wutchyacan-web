@@ -25,20 +25,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
   return store;
 };
 
-const initialState: Partial<RootState> = {
-  list: {
-    entities: {
-      '00': {
-        id: '00',
-        name: 'inbox',
-        members: ['member1'],
-      },
-    },
-    ids: ['00'],
-  },
-}
-
-export const store = makeStore(initialState);
+export const store = makeStore();
 
 // Infer the type of `store`
 export type AppStore = typeof store;

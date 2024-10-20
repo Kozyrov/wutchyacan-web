@@ -7,6 +7,7 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { addTask, taskSlice } from '../../entities/Task/taskSlice';
 import { listSlice } from '../../entities/List/listSlice';
 import { Task } from '../../app/types';
+import { inboxId } from '../../app/constants';
 
 // src/features/taskInbox/TaskInbox.test.tsx
 
@@ -16,6 +17,7 @@ describe('TaskInbox', () => {
     id: '1',
     label: 'Test Task',
     points: 0,
+    list: inboxId,
     completed: false,
   };
 

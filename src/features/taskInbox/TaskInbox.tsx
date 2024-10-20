@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { type Task } from '../../app/types';
-import { selectTaskEntities } from '../../entities/Task/taskSlice';
 import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
+import { inboxId } from '../../app/constants';
+import { selectAllTasksInListById } from '../../entities/List/listSlice';
 
 export const TaskInbox = () => {
-  const tasks: Record<string, Task> = useAppSelector(selectTaskEntities);
-  const [freshTask, setFreshTask] = useState<Task>(generateBlankTask());
+  const tasks: Task[] = useAppSelector(selectAllTasksInListById(inboxId));
+  const [freshTask, setFreshTask] = useState<Task>(generateBlankTask(inboxId));
 
   const [addNewTaskInputOpen, setAddNewTaskInputOpen] =
     useState<boolean>(false);
 
   const refreshNewTaskInput = () => {
     setAddNewTaskInputOpen(false);
-    setFreshTask(generateBlankTask());
+    setFreshTask(generateBlankTask(inboxId));
   };
 
   const handleCancelNewTaskInput = () => {

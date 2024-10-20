@@ -6,6 +6,7 @@ import { Task } from '../../app/types';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import taskReducer, { deleteTask } from '../../entities/Task/taskSlice';
+import { inboxId } from '../../app/constants';
 
 // src/components/taskContextMenu/TaskContextMenu.test.tsx
 const dispatch = vi.fn();
@@ -20,7 +21,7 @@ describe('TaskContextMenu', () => {
     label: 'Test Task',
     completed: false,
     points: 0,
-    list: 'inbox',
+    list: inboxId,
   };
 
   const closeMenu = vi.fn();

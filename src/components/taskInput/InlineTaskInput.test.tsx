@@ -4,8 +4,10 @@ import { describe, it, expect, vi } from 'vitest';
 import { InlineTaskInput } from './InlineTaskInput';
 import { Task } from '../../app/types';
 import { Provider } from 'react-redux';
-import { addTask } from '../../entities/Task/taskSlice';
-import { makeStore, RootState } from '../../app/store';
+import taskReducer, { addTask } from '../../entities/Task/taskSlice';
+import listReducer from '../../entities/List/listSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { inboxId } from '../../app/constants';
 
 // src/components/taskInput/inlineTaskInput/InlineTaskInput.test.tsx
 const dispatch = vi.fn();
@@ -20,25 +22,17 @@ describe('InlineTaskInput', () => {
     label: 'Test Task',
     completed: false,
     points: 0,
-    list: '00',
+    list: inboxId,
   };
 
   const mockCloseInput = vi.fn();
 
-  const preloadedState: Partial<RootState> = {
-    list: {
-      entities: {
-        '00': {
-          id: '00',
-          name: 'inbox',
-          members: ['member1'],
-        },
-      },
-      ids: ['00'],
+  const storeMock = configureStore({
+    reducer: {
+      task: taskReducer,
+      list: listReducer,
     },
-  };
-
-  const storeMock = makeStore(preloadedState);
+  });
 
   const renderComponent = () => {
     return render(
