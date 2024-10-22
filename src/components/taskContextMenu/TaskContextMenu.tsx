@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Task } from '../../app/types';
 import { useAppDispatch } from '../../app/hooks';
-import { deleteTask } from '../../entities/Task/taskSlice';
+import { deleteTask } from '../../entities/task/taskSlice';
 
 interface TaskContextMenuProps {
   task: Task;

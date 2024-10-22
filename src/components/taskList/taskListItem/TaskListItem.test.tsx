@@ -3,8 +3,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Provider } from 'react-redux';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import { taskSlice } from '../../../entities/Task/taskSlice';
-import { listSlice } from '../../../entities/List/listSlice';
+import { taskSlice } from '../../../entities/task/taskSlice';
+import { listSlice } from '../../../entities/list/listSlice';
 import { TaskListItem } from './TaskListItem';
 import { inboxId } from '../../../app/constants';
 

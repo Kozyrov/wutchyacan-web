@@ -5,7 +5,7 @@ import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
 import { inboxId } from '../../app/constants';
-import { selectAllTasksInListById } from '../../entities/List/listSlice';
+import { selectAllTasksInListById } from '../../entities/list/listSlice';
 
 export const TaskInbox = () => {
   const tasks: Task[] = useAppSelector(selectAllTasksInListById(inboxId));

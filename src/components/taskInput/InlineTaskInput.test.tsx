@@ -4,8 +4,8 @@ import { describe, it, expect, vi } from 'vitest';
 import { InlineTaskInput } from './InlineTaskInput';
 import { Task } from '../../app/types';
 import { Provider } from 'react-redux';
-import taskReducer, { addTask } from '../../entities/Task/taskSlice';
-import listReducer from '../../entities/List/listSlice';
+import taskReducer, { addTask } from '../../entities/task/taskSlice';
+import listReducer from '../../entities/list/listSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import { inboxId } from '../../app/constants';
 

@@ -5,7 +5,7 @@ import { TaskContextMenu } from './TaskContextMenu';
 import { Task } from '../../app/types';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import taskReducer, { deleteTask } from '../../entities/Task/taskSlice';
+import taskReducer, { deleteTask } from '../../entities/task/taskSlice';
 import { inboxId } from '../../app/constants';
 
 // src/components/taskContextMenu/TaskContextMenu.test.tsx

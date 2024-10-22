@@ -1,7 +1,7 @@
 import React from 'react';
 import { type Task } from '../../app/types';
 import { type ChangeEvent, type FormEvent, useState } from 'react';
-import { addTask } from '../../entities/Task/taskSlice';
+import { addTask } from '../../entities/task/taskSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 interface InlineTaskInputProps {

@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
 import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
-import { addTask } from '../Task/taskSlice';
+import { addTask } from '../task/taskSlice';
 import { inboxId } from '../../app/constants';
 
 const listAdapter = createEntityAdapter<List>();

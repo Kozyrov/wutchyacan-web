@@ -11,9 +11,9 @@ import {
 } from './taskSlice';
 import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
-import { addList, listSlice } from '../List/listSlice';
+import { addList, listSlice } from '../list/listSlice';
 
-// src/entities/Task/taskSlice.test.ts
+// src/entities/task/taskSlice.test.ts
 
 describe('taskSlice', () => {
   let store: ReturnType<typeof configureStore>;

@@ -4,8 +4,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { TaskInbox } from './TaskInbox';
 import { Provider } from 'react-redux';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import { addTask, taskSlice } from '../../entities/Task/taskSlice';
-import { listSlice } from '../../entities/List/listSlice';
+import { addTask, taskSlice } from '../../entities/task/taskSlice';
+import { listSlice } from '../../entities/list/listSlice';
 import { Task } from '../../app/types';
 import { inboxId } from '../../app/constants';
 

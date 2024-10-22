@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import App from './App'; // Adjust the import path as necessary
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import { taskSlice } from './entities/Task/taskSlice';
-import { listSlice } from './entities/List/listSlice';
+import { taskSlice } from './entities/task/taskSlice';
+import { listSlice } from './entities/list/listSlice';
 import { Provider } from 'react-redux';
 
 // src/App.test.tsx
