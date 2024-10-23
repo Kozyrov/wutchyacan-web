@@ -2,12 +2,15 @@ import React, { memo, useState } from 'react';
 import { type Task } from '../../../app/types';
 import { TaskContextMenu } from '../../taskContextMenu/TaskContextMenu';
 import { InlineTaskInput } from '../../taskInput/InlineTaskInput';
+import { useAppDispatch } from '../../../app/hooks';
+import { updateTask } from '../../../entities/task/taskSlice';
 
 interface TaskListItemProps {
   task: Task;
 }
 
 export const TaskListItem = memo(({ task }: TaskListItemProps) => {
+  const dispatch = useAppDispatch();
   const [editState, setEditState] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(false);
   const [contextMenuVisibility, setContextMenuVisibility] =
@@ -19,7 +22,10 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
         <div
           className="flex"
           onMouseEnter={() => setShowControls(true)}
-          onMouseLeave={() => setShowControls(false)}
+          onMouseLeave={() => {
+            setShowControls(false);
+            setContextMenuVisibility(false);
+          }}
           data-testid="task-list-item-container"
         >
           <div className="flex flex-row">
@@ -47,6 +53,7 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
         <InlineTaskInput
           incomingTask={task}
           closeInput={() => setEditState(false)}
+          saveTask={(updatedTask: Task) => dispatch(updateTask({id: updatedTask.id, changes: updatedTask}))}
         />
       )}
     </div>

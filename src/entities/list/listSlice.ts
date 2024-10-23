@@ -1,8 +1,8 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
 import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
-import { addTask } from '../task/taskSlice';
 import { inboxId } from '../../app/constants';
+import { addTask, deleteTask } from '../task/taskSlice';
 
 const listAdapter = createEntityAdapter<List>();
 
@@ -15,6 +15,9 @@ const defaultLists: List[] = [
 ];
 
 export const initialListState = listAdapter.getInitialState(undefined, defaultLists);
+
+const listState = (state: RootState) => state.list;
+const taskState = (state: RootState) => state.task;
 
 export const listSlice = createSlice({
   name: 'list',
@@ -33,13 +36,17 @@ export const listSlice = createSlice({
         }
         listAdapter.updateOne(state, updatePayload);
       })
+      .addCase(deleteTask, (state, action) => {
+        const { list, id } = action.payload;
+        const updatePayload = {
+          id: list, changes: { members: state.entities[list].members.filter((memberId: string) => memberId !== id) }
+        }
+        listAdapter.updateOne(state, updatePayload);
+      })
   },
 });
 
 export const { addList, removeList, updateList } = listSlice.actions;
-
-const listState = (state: RootState) => state.list;
-const taskState = (state: RootState) => state.task;
 
 export const selectAllTasksInListById = (listId: string) => createSelector(
   [listState, taskState],

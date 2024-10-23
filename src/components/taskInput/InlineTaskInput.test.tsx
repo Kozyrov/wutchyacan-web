@@ -3,10 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { InlineTaskInput } from './InlineTaskInput';
 import { Task } from '../../app/types';
-import { Provider } from 'react-redux';
-import taskReducer, { addTask } from '../../entities/task/taskSlice';
-import listReducer from '../../entities/list/listSlice';
-import { configureStore } from '@reduxjs/toolkit';
 import { inboxId } from '../../app/constants';
 
 // src/components/taskInput/inlineTaskInput/InlineTaskInput.test.tsx
@@ -26,19 +22,11 @@ describe('InlineTaskInput', () => {
   };
 
   const mockCloseInput = vi.fn();
-
-  const storeMock = configureStore({
-    reducer: {
-      task: taskReducer,
-      list: listReducer,
-    },
-  });
+  const mockSaveTask = vi.fn();
 
   const renderComponent = () => {
     return render(
-      <Provider store={storeMock}>
-        <InlineTaskInput closeInput={mockCloseInput} incomingTask={taskStub} />
-      </Provider>
+      <InlineTaskInput closeInput={mockCloseInput} incomingTask={taskStub} saveTask={mockSaveTask}/>
     );
   };
 
@@ -59,7 +47,7 @@ describe('InlineTaskInput', () => {
     renderComponent();
     const form = screen.getByTestId('inline-task-input-form');
     fireEvent.submit(form);
-    expect(dispatch).toHaveBeenCalledWith(addTask(taskStub));
+    expect(mockSaveTask).toHaveBeenCalledWith(taskStub);
     expect(mockCloseInput).toHaveBeenCalled();
   });
 

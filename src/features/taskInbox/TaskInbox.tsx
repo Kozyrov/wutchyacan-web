@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { type Task } from '../../app/types';
 import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
 import { inboxId } from '../../app/constants';
 import { selectAllTasksInListById } from '../../entities/list/listSlice';
+import { addTask } from '../../entities/task/taskSlice';
 
 export const TaskInbox = () => {
+  const dispatch = useAppDispatch();
   const tasks: Task[] = useAppSelector(selectAllTasksInListById(inboxId));
   const [freshTask, setFreshTask] = useState<Task>(generateBlankTask(inboxId));
 
@@ -36,6 +38,7 @@ export const TaskInbox = () => {
           <InlineTaskInput
             incomingTask={freshTask}
             closeInput={handleCancelNewTaskInput}
+            saveTask={(newTask: Task) => dispatch(addTask(newTask))}
           />
         )}
       </div>

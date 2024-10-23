@@ -73,7 +73,7 @@ describe('taskSlice', () => {
   it('should handle deleteTask', () => {
     store.dispatch(addList(listItem));
     store.dispatch(addTask(taskItem));
-    store.dispatch(deleteTask(taskItem.id));
+    store.dispatch(deleteTask(taskItem));
     const state = store.getState() as RootState;
     expect(state.task.ids).not.toContain(taskItem.id);
     expect(state.task.entities[taskItem.id]).toBeUndefined();

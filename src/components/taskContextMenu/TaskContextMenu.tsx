@@ -27,7 +27,7 @@ export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
   }, []);
 
   const handleDeleteTask = () => {
-    dispatch(deleteTask(task.id));
+    dispatch(deleteTask(task));
     closeMenu();
   };
 

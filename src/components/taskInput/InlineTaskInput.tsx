@@ -1,19 +1,18 @@
 import React from 'react';
 import { type Task } from '../../app/types';
 import { type ChangeEvent, type FormEvent, useState } from 'react';
-import { addTask } from '../../entities/task/taskSlice';
-import { useAppDispatch } from '../../app/hooks';
 
 interface InlineTaskInputProps {
   closeInput: () => void;
+  saveTask: (task: Task) => void; 
   incomingTask: Task;
 }
 
 export const InlineTaskInput = ({
   closeInput,
+  saveTask,
   incomingTask,
 }: InlineTaskInputProps) => {
-  const dispatch = useAppDispatch();
   const [task, setTask] = useState<Task>(incomingTask);
 
   const handleLabelChange = (label: string) => {
@@ -25,7 +24,7 @@ export const InlineTaskInput = ({
 
   const handleSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addTask(task));
+    saveTask(task);
     closeInput();
   };
 

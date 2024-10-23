@@ -56,7 +56,7 @@ describe('TaskContextMenu', () => {
     renderComponent();
     const deleteButton = screen.getByText('Delete');
     fireEvent.click(deleteButton);
-    expect(dispatch).toHaveBeenCalledWith(deleteTask(task.id));
+    expect(dispatch).toHaveBeenCalledWith(deleteTask(task));
     expect(closeMenu).toHaveBeenCalled();
   });
 });
