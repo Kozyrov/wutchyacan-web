@@ -1,8 +1,8 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
-import { List, Task } from '../../app/types';
+import { List, Task, TaskStatusLists } from '../../app/types';
 import { RootState } from '../../app/store';
 import { inboxId } from '../../app/constants';
-import { addTask, deleteTask } from '../task/taskSlice';
+import { addTask, deleteTask, completeTask } from '../task/taskSlice';
 
 const listAdapter = createEntityAdapter<List>();
 
@@ -11,7 +11,9 @@ const defaultLists: List[] = [
     id: inboxId,
     name: 'Inbox',
     members: [],
-  }
+    removed: [],
+    completed: [],
+  },
 ];
 
 export const initialListState = listAdapter.getInitialState(undefined, defaultLists);
@@ -32,26 +34,44 @@ export const listSlice = createSlice({
       .addCase(addTask, (state, action) => {
         const { list, id } = action.payload;
         const updatePayload = {
-         id: list, changes: { members: [...state.entities[list].members, id] }
+          id: list,
+          changes: {
+            members: [...state.entities[list].members, id]
+          }
         }
         listAdapter.updateOne(state, updatePayload);
       })
       .addCase(deleteTask, (state, action) => {
         const { list, id } = action.payload;
-        const updatePayload = {
-          id: list, changes: { members: state.entities[list].members.filter((memberId: string) => memberId !== id) }
+        const deleteUpdatePayload = {
+          id: list,
+          changes: {
+            members: state.entities[list].members.filter((memberId: string) => memberId !== id)
+          }
         }
-        listAdapter.updateOne(state, updatePayload);
+        listAdapter.updateOne(state, deleteUpdatePayload);
       })
-  },
+      .addCase(completeTask, (state, action) => {
+        const { list, id } = action.payload;
+        const updateCompletePayload = {
+          id: list,
+          changes: { 
+            members: state.entities[list].members.filter((memberId: string) => memberId !== id),
+            completed: [...state.entities[list].completed, id]
+          },
+        }
+
+        listAdapter.updateOne(state, updateCompletePayload);
+      })
+    }
 });
 
 export const { addList, removeList, updateList } = listSlice.actions;
 
-export const selectAllTasksInListById = (listId: string) => createSelector(
+export const selectAllTasksByListId = (listId: string, targetList: TaskStatusLists) => createSelector(
   [listState, taskState],
   (list: EntityState<List, string>, task: EntityState<Task, string>) => {
-    const memberIds: string[] = list.entities[listId]?.members;
+    const memberIds: string[] = list.entities[listId]?.[targetList] || [];
     const memberTasks = memberIds.map((memberId: string) => task.entities[memberId]);
     return memberTasks;
   }

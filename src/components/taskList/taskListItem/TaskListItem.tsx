@@ -3,7 +3,11 @@ import { type Task } from '../../../app/types';
 import { TaskContextMenu } from '../../taskContextMenu/TaskContextMenu';
 import { InlineTaskInput } from '../../taskInput/InlineTaskInput';
 import { useAppDispatch } from '../../../app/hooks';
-import { updateTask } from '../../../entities/task/taskSlice';
+import {
+  completeTask,
+  deleteTask,
+  updateTask,
+} from '../../../entities/task/taskSlice';
 
 interface TaskListItemProps {
   task: Task;
@@ -16,18 +20,33 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
   const [contextMenuVisibility, setContextMenuVisibility] =
     useState<boolean>(false);
 
+  const handleDeleteTask = () => {
+    dispatch(deleteTask(task));
+    setContextMenuVisibility(false);
+  };
+
   return (
-    <div data-testid="task-list-item">
+    <div
+      data-testid="task-list-item"
+      onMouseEnter={() => setShowControls(true)}
+      onMouseLeave={() => {
+        setShowControls(false);
+        setContextMenuVisibility(false);
+      }}
+    >
       {!editState ? (
-        <div
-          className="flex"
-          onMouseEnter={() => setShowControls(true)}
-          onMouseLeave={() => {
-            setShowControls(false);
-            setContextMenuVisibility(false);
-          }}
-          data-testid="task-list-item-container"
-        >
+        <div className="flex" data-testid="task-list-item-container">
+          {showControls && !task.completed && (
+            <div>
+              <button
+                type="button"
+                role="checkbox"
+                onClick={() => dispatch(completeTask(task))}
+              >
+                complete
+              </button>
+            </div>
+          )}
           <div className="flex flex-row">
             <div id={task.id}>{task.label}</div>
           </div>
@@ -42,9 +61,12 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
               </button>
               {contextMenuVisibility && (
                 <TaskContextMenu
-                  task={task}
                   closeMenu={() => setContextMenuVisibility(false)}
-                />
+                >
+                  <button type="button" onClick={handleDeleteTask}>
+                    Delete
+                  </button>
+                </TaskContextMenu>
               )}
             </div>
           )}
@@ -53,7 +75,9 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
         <InlineTaskInput
           incomingTask={task}
           closeInput={() => setEditState(false)}
-          saveTask={(updatedTask: Task) => dispatch(updateTask({id: updatedTask.id, changes: updatedTask}))}
+          saveTask={(updatedTask: Task) =>
+            dispatch(updateTask({ id: updatedTask.id, changes: updatedTask }))
+          }
         />
       )}
     </div>

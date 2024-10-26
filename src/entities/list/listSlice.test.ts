@@ -7,6 +7,7 @@ import {
   updateList,
   selectListById,
   initialListState,
+  selectAllTasksByListId,
 } from './listSlice';
 import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
@@ -20,12 +21,16 @@ describe('listSlice', () => {
     id: '1',
     name: 'Test List',
     members: ['member1'],
+    removed: ['removedMember1'],
+    completed: ['completedMember1'],
   };
 
   const updatedListItem: List = {
     id: '1',
     name: 'Updated Test List',
     members: ['member2'],
+    removed: [],
+    completed: [],
   };
 
   const newTask: Task = {
@@ -114,5 +119,16 @@ describe('listSlice', () => {
     const state = store.getState() as RootState;
     const selectedList = selectListById(state, listItem.id);
     expect(selectedList).toEqual(listItem);
+  });
+
+  it('should return a list of task ids from any of the task status sub-lists by list id', () => {
+    store.dispatch(addList(listItem));
+    const state = store.getState() as RootState;
+    const membersList = selectAllTasksByListId(listItem.id, 'members')(state);
+    expect(membersList.length).toEqual(listItem.members.length);
+    const removedList = selectAllTasksByListId(listItem.id, 'removed')(state);
+    expect(removedList.length).toEqual(listItem.removed.length);
+    const completedList = selectAllTasksByListId(listItem.id, 'completed')(state);
+    expect(completedList.length).toEqual(listItem.completed.length);
   });
 });

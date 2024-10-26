@@ -11,5 +11,8 @@ export interface List {
   id: string;
   name: string;
   members: string[];
+  removed: string[];
+  completed: string[];
 }
 export type ReduxLoadingStatus = 'idle' | 'loading' | 'failed';
+export type TaskStatusLists = 'members' | 'removed' | 'completed';

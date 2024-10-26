@@ -5,12 +5,17 @@ import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
 import { TaskList } from '../../components/taskList/TaskList';
 import { inboxId } from '../../app/constants';
-import { selectAllTasksInListById } from '../../entities/list/listSlice';
+import { selectAllTasksByListId } from '../../entities/list/listSlice';
 import { addTask } from '../../entities/task/taskSlice';
 
 export const TaskInbox = () => {
   const dispatch = useAppDispatch();
-  const tasks: Task[] = useAppSelector(selectAllTasksInListById(inboxId));
+  const tasks: Task[] = useAppSelector(
+    selectAllTasksByListId(inboxId, 'members')
+  );
+  const completedTasks: Task[] = useAppSelector(
+    selectAllTasksByListId(inboxId, 'completed')
+  );
   const [freshTask, setFreshTask] = useState<Task>(generateBlankTask(inboxId));
 
   const [addNewTaskInputOpen, setAddNewTaskInputOpen] =
@@ -29,6 +34,8 @@ export const TaskInbox = () => {
   return (
     <div data-testid="task-inbox">
       <TaskList tasks={tasks} />
+      {completedTasks.length && <span>completed</span>}
+      <TaskList tasks={completedTasks} />
       <div className="flex-row">
         {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>

@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { Task } from '../../app/types';
-import { useAppDispatch } from '../../app/hooks';
-import { deleteTask } from '../../entities/task/taskSlice';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 
 interface TaskContextMenuProps {
-  task: Task;
   closeMenu: () => void;
 }
 
-export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
-  const dispatch = useAppDispatch();
-
+export const TaskContextMenu = ({
+  closeMenu,
+  children,
+}: PropsWithChildren<TaskContextMenuProps>) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,16 +23,9 @@ export const TaskContextMenu = ({ task, closeMenu }: TaskContextMenuProps) => {
     };
   }, []);
 
-  const handleDeleteTask = () => {
-    dispatch(deleteTask(task));
-    closeMenu();
-  };
-
   return (
     <div ref={menuRef} data-testid="task-context-menu">
-      <button type="button" onClick={handleDeleteTask}>
-        Delete
-      </button>
+      {children}
     </div>
   );
 };

@@ -27,14 +27,21 @@ export const taskSlice = createAppSlice({
       taskAdapter.removeOne(state, action.payload.id);
     },
     deleteTask(state, action: PayloadAction<Task>) {
-      // whole task passed in for addition reducers in other slices.
+      // whole task passed in for additional reducers in other slices.
       taskAdapter.removeOne(state, action.payload.id);
     },
     updateTask: taskAdapter.updateOne,
+    completeTask(state, action: PayloadAction<Task>) {
+      // whole task passed in for additional reducers in other slices.
+      taskAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { completed: true },
+      });
+    },
   },
 });
 
-export const { addTask, removeTask, deleteTask, updateTask } =
+export const { addTask, removeTask, deleteTask, updateTask, completeTask } =
   taskSlice.actions;
 
 export const {
