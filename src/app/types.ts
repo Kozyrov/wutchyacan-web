@@ -14,5 +14,10 @@ export interface List {
   removed: string[];
   completed: string[];
 }
+
+export interface Option {
+  id: string;
+  label: string;
+}
 export type ReduxLoadingStatus = 'idle' | 'loading' | 'failed';
 export type TaskStatusLists = 'members' | 'removed' | 'completed';

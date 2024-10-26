@@ -13,9 +13,9 @@ if (container) {
 
   root.render(
     <React.StrictMode>
-        <Provider store={store}>
-          <RouterProvider router={Router} />
-        </Provider>
+      <Provider store={store}>
+        <RouterProvider router={Router} />
+      </Provider>
     </React.StrictMode>
   );
 } else {
