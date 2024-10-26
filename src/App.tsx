@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import TaskInbox from './features/taskInbox/TaskInbox';
 import SideBar from './features/sideBar/SideBar';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
           <div className="justify-center m-7 p-3">
             <h1 className="font-bold">Wutchyacan</h1>
           </div>
-          <TaskInbox />
+          <Outlet />
         </main>
       </div>
     </div>
