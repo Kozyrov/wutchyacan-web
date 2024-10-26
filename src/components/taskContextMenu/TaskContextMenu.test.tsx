@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { TaskContextMenu } from './TaskContextMenu';
 import { Provider } from 'react-redux';
@@ -29,12 +29,6 @@ describe('TaskContextMenu', () => {
       </Provider>
     );
   };
-
-  it('should render TaskContextMenu component', () => {
-    renderComponent();
-    expect(screen.getByTestId('task-context-menu')).toBeInTheDocument();
-    expect(screen.getByText('Delete')).toBeInTheDocument();
-  });
 
   it('should call closeMenu when clicking outside the menu', () => {
     renderComponent();

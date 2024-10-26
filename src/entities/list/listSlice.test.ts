@@ -112,7 +112,7 @@ describe('listSlice', () => {
     store.dispatch(addTask(newTask));
     const state = store.getState() as RootState;
     expect(state.list.entities[listItem.id]?.members).toContain(newTask.id);
-  })
+  });
 
   it('should select list by id', () => {
     store.dispatch(addList(listItem));
@@ -128,7 +128,10 @@ describe('listSlice', () => {
     expect(membersList.length).toEqual(listItem.members.length);
     const removedList = selectAllTasksByListId(listItem.id, 'removed')(state);
     expect(removedList.length).toEqual(listItem.removed.length);
-    const completedList = selectAllTasksByListId(listItem.id, 'completed')(state);
+    const completedList = selectAllTasksByListId(
+      listItem.id,
+      'completed'
+    )(state);
     expect(completedList.length).toEqual(listItem.completed.length);
   });
 });

@@ -41,8 +41,8 @@ describe('TaskInbox', () => {
   it('should display tasks', () => {
     store.dispatch(addTask(taskItem));
     renderWithProviders(<TaskInbox />);
-    const tasks = screen.getByTestId('task-list');
-    expect(tasks).toBeInTheDocument();
+    const taskLists = screen.getAllByTestId('task-list');
+    expect(taskLists.length).toBe(2);
   });
 
   it('should display an add task button', () => {

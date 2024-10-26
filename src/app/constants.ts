@@ -4,4 +4,4 @@ export const taskStatusLists = {
   members: 'members',
   completed: 'completed',
   removed: 'removed',
-}
+};

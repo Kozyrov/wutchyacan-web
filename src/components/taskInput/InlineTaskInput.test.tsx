@@ -26,7 +26,11 @@ describe('InlineTaskInput', () => {
 
   const renderComponent = () => {
     return render(
-      <InlineTaskInput closeInput={mockCloseInput} incomingTask={taskStub} saveTask={mockSaveTask}/>
+      <InlineTaskInput
+        closeInput={mockCloseInput}
+        incomingTask={taskStub}
+        saveTask={mockSaveTask}
+      />
     );
   };
 

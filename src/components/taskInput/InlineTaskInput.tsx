@@ -4,7 +4,7 @@ import { type ChangeEvent, type FormEvent, useState } from 'react';
 
 interface InlineTaskInputProps {
   closeInput: () => void;
-  saveTask: (task: Task) => void; 
+  saveTask: (task: Task) => void;
   incomingTask: Task;
 }
 
