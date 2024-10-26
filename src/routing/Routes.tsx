@@ -6,7 +6,7 @@ import TaskInbox from '../features/taskInbox/TaskInbox';
 
 const Router = createBrowserRouter([
   {
-    path: '/wutchyacan',
+    path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
