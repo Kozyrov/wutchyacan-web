@@ -8,7 +8,7 @@ interface InlineTaskInputProps {
   incomingTask: Task;
 }
 
-export const InlineTaskInput = ({
+const InlineTaskInput = ({
   closeInput,
   saveTask,
   incomingTask,
@@ -47,3 +47,5 @@ export const InlineTaskInput = ({
     </div>
   );
 };
+
+export default InlineTaskInput;

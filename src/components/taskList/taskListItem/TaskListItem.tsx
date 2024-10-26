@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { type Task } from '../../../app/types';
-import { TaskContextMenu } from '../../taskContextMenu/TaskContextMenu';
-import { InlineTaskInput } from '../../taskInput/InlineTaskInput';
+import TaskContextMenu from '../../taskContextMenu/TaskContextMenu';
+import InlineTaskInput from '../../taskInput/InlineTaskInput';
 import { useAppDispatch } from '../../../app/hooks';
 import {
   completeTask,
@@ -13,7 +13,7 @@ interface TaskListItemProps {
   task: Task;
 }
 
-export const TaskListItem = memo(({ task }: TaskListItemProps) => {
+const TaskListItem = memo(({ task }: TaskListItemProps) => {
   const dispatch = useAppDispatch();
   const [editState, setEditState] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(false);
@@ -52,7 +52,9 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
           </div>
           {showControls && (
             <div data-testid="task-list-item-controls">
-              <button onClick={() => setEditState(true)}>edit</button>
+              {!task.completed && (
+                <button onClick={() => setEditState(true)}>edit</button>
+              )}
               <button
                 type="button"
                 onClick={() => setContextMenuVisibility(!contextMenuVisibility)}
@@ -85,3 +87,5 @@ export const TaskListItem = memo(({ task }: TaskListItemProps) => {
 });
 
 TaskListItem.displayName = 'TaskListItem';
+
+export default TaskListItem;

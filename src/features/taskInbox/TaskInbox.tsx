@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { type Task } from '../../app/types';
-import { InlineTaskInput } from '../../components/taskInput/InlineTaskInput';
+import InlineTaskInput from '../../components/taskInput/InlineTaskInput';
 import { generateBlankTask } from '../../utils/utility-methods';
-import { TaskList } from '../../components/taskList/TaskList';
+import TaskList from '../../components/taskList/TaskList';
 import { inboxId } from '../../app/constants';
 import { selectAllTasksByListId } from '../../entities/list/listSlice';
 import { addTask } from '../../entities/task/taskSlice';
 
-export const TaskInbox = () => {
+const TaskInbox = () => {
   const dispatch = useAppDispatch();
   const tasks: Task[] = useAppSelector(
     selectAllTasksByListId(inboxId, 'members')
@@ -32,10 +32,9 @@ export const TaskInbox = () => {
   };
 
   return (
-    <div data-testid="task-inbox">
+    <div data-testid="task-inbox" className="flex-col m-3 p-3">
+      <h1 className="flex font-bold">Inbox</h1>
       <TaskList tasks={tasks} />
-      {completedTasks.length && <span>completed</span>}
-      <TaskList tasks={completedTasks} />
       <div className="flex-row">
         {!addNewTaskInputOpen ? (
           <button type="button" onClick={() => setAddNewTaskInputOpen(true)}>
@@ -49,6 +48,10 @@ export const TaskInbox = () => {
           />
         )}
       </div>
+      {!!completedTasks.length && <span>completed</span>}
+      <TaskList tasks={completedTasks} />
     </div>
   );
 };
+
+export default TaskInbox;

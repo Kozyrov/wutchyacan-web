@@ -4,7 +4,7 @@ interface TaskContextMenuProps {
   closeMenu: () => void;
 }
 
-export const TaskContextMenu = ({
+const TaskContextMenu = ({
   closeMenu,
   children,
 }: PropsWithChildren<TaskContextMenuProps>) => {
@@ -31,3 +31,5 @@ export const TaskContextMenu = ({
 };
 
 TaskContextMenu.displayName = 'TaskContextMenu';
+
+export default TaskContextMenu;

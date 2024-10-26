@@ -6,7 +6,7 @@ interface TaskListItemInlineEditorProps {
   onCancel: () => void;
 }
 
-export const TaskListItemInlineEditor = ({
+const TaskListItemInlineEditor = ({
   task,
   onCancel,
 }: TaskListItemInlineEditorProps) => {
@@ -28,3 +28,5 @@ export const TaskListItemInlineEditor = ({
     </div>
   );
 };
+
+export default TaskListItemInlineEditor;
