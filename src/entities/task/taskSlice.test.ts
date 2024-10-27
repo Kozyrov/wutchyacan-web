@@ -19,7 +19,7 @@ describe('taskSlice', () => {
   let store: ReturnType<typeof configureStore>;
   const taskItem: Task = {
     id: '1',
-    label: 'Test Task',
+    name: 'Test Task',
     points: 0,
     completed: false,
     list: '101',
@@ -28,12 +28,15 @@ describe('taskSlice', () => {
   const listItem: List = {
     id: '101',
     name: 'Test List',
+    project: 'default',
     members: [],
+    removed: [],
+    completed: [],
   };
 
   const updatedTaskItem: Task = {
     id: '1',
-    label: 'Updated Test Task',
+    name: 'Updated Test Task',
     points: 1,
     completed: true,
     list: '101',
@@ -86,15 +89,15 @@ describe('taskSlice', () => {
       updateTask({
         id: taskItem.id,
         changes: {
-          label: updatedTaskItem.label,
+          name: updatedTaskItem.name,
           points: updatedTaskItem.points,
           completed: updatedTaskItem.completed,
         },
       })
     );
     const state = store.getState() as RootState;
-    expect(state.task.entities[taskItem.id]?.label).toEqual(
-      updatedTaskItem.label
+    expect(state.task.entities[taskItem.id]?.name).toEqual(
+      updatedTaskItem.name
     );
     expect(state.task.entities[taskItem.id]?.points).toEqual(
       updatedTaskItem.points

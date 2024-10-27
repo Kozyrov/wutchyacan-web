@@ -15,6 +15,7 @@ const defaultLists: List[] = [
   {
     id: inboxId,
     name: 'Inbox',
+    project: 'default',
     members: [],
     removed: [],
     completed: [],

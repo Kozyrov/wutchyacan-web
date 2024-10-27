@@ -5,16 +5,17 @@ import { Provider } from 'react-redux';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { taskSlice } from '../../../entities/task/taskSlice';
 import { listSlice } from '../../../entities/list/listSlice';
-import { TaskListItem } from './TaskListItem';
+import TaskListItem from './TaskListItem';
 import { inboxId } from '../../../app/constants';
+import { Task } from '../../../app/types';
 
 // src/components/taskList/taskListItem/TaskListItem.test.tsx
 
 describe('TaskListItem', () => {
   let store: ReturnType<typeof configureStore>;
-  const taskItem = {
+  const taskItem: Task = {
     id: '1',
-    label: 'Test Task',
+    name: 'Test Task',
     points: 0,
     list: inboxId,
     completed: false,
@@ -37,10 +38,10 @@ describe('TaskListItem', () => {
     expect(screen.getByTestId('task-list-item')).toBeInTheDocument();
   });
 
-  it('should display task label', () => {
+  it('should display task name', () => {
     renderWithProviders(<TaskListItem task={taskItem} />);
-    const taskLabel = screen.getByText(taskItem.label);
-    expect(taskLabel).toBeInTheDocument();
+    const taskName = screen.getByText(taskItem.name);
+    expect(taskName).toBeInTheDocument();
   });
 
   it('should display and hide controls on cursor in and out', () => {

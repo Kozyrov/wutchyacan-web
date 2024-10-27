@@ -15,10 +15,10 @@ const InlineTaskInput = ({
 }: InlineTaskInputProps) => {
   const [task, setTask] = useState<Task>(incomingTask);
 
-  const handleLabelChange = (label: string) => {
+  const handleNameChange = (name: string) => {
     setTask({
       ...task,
-      label,
+      name,
     });
   };
 
@@ -32,11 +32,11 @@ const InlineTaskInput = ({
     <div data-testid="inline-task-input">
       <form onSubmit={e => handleSave(e)} data-testid="inline-task-input-form">
         <input
-          name="label"
+          name="name"
           autoFocus
-          value={task.label}
+          value={task.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleLabelChange(e.target.value)
+            handleNameChange(e.target.value)
           }
         />
         <button type="button" onClick={closeInput}>

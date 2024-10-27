@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { InlineTaskInput } from './InlineTaskInput';
+import InlineTaskInput from './InlineTaskInput';
 import { Task } from '../../app/types';
 import { inboxId } from '../../app/constants';
 
@@ -15,7 +15,7 @@ vi.mock('../../app/hooks', () => ({
 describe('InlineTaskInput', () => {
   const taskStub: Task = {
     id: '1',
-    label: 'Test Task',
+    name: 'Test Task',
     completed: false,
     points: 0,
     list: inboxId,

@@ -5,7 +5,7 @@ export const generateUniqueIteratorKey = () =>
   (Date.now() + Math.random()).toString();
 export const generateBlankTask = (listId: string): Task => ({
   id: nanoid(),
-  label: '',
+  name: '',
   points: 0,
   list: listId,
   completed: false,

@@ -48,7 +48,7 @@ const TaskListItem = memo(({ task }: TaskListItemProps) => {
             </div>
           )}
           <div className="flex flex-row">
-            <div id={task.id}>{task.label}</div>
+            <div id={task.id}>{task.name}</div>
           </div>
           {showControls && (
             <div data-testid="task-list-item-controls">

@@ -6,7 +6,7 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { taskSlice } from '../../entities/task/taskSlice';
 import { listSlice } from '../../entities/list/listSlice';
 import { Task } from '../../app/types';
-import { TaskList } from './TaskList';
+import TaskList from './TaskList';
 import { inboxId } from '../../app/constants';
 
 // src/components/taskList/TaskList.test.tsx
@@ -16,7 +16,7 @@ describe('TaskList', () => {
   const tasks: Task[] = [
     {
       id: '1',
-      label: 'Test Task',
+      name: 'Test Task',
       points: 0,
       list: inboxId,
       completed: false,

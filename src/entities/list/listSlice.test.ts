@@ -20,6 +20,7 @@ describe('listSlice', () => {
   const listItem: List = {
     id: '1',
     name: 'Test List',
+    project: 'default',
     members: ['member1'],
     removed: ['removedMember1'],
     completed: ['completedMember1'],
@@ -28,6 +29,7 @@ describe('listSlice', () => {
   const updatedListItem: List = {
     id: '1',
     name: 'Updated Test List',
+    project: 'default',
     members: ['member2'],
     removed: [],
     completed: [],
@@ -35,7 +37,7 @@ describe('listSlice', () => {
 
   const newTask: Task = {
     id: '101',
-    label: 'newMember',
+    name: 'newMember',
     points: 0,
     list: listItem.id,
     completed: false,

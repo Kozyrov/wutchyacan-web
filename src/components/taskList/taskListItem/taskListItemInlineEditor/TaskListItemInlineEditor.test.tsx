@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { TaskListItemInlineEditor } from './TaskListItemInlineEditor';
+import TaskListItemInlineEditor from './TaskListItemInlineEditor';
 import { Task } from '../../../../app/types';
 
 // src/components/taskList/taskListItem/taskListItemInlineEditor/TaskListItemInlineEditor.test.tsx
@@ -9,7 +9,7 @@ import { Task } from '../../../../app/types';
 describe('TaskListItemInlineEditor', () => {
   const task: Task = {
     id: '1',
-    label: 'Test Task',
+    name: 'Test Task',
     completed: false,
     points: 0,
     list: 'inbox',

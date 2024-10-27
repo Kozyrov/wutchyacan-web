@@ -3,9 +3,14 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { taskSlice } from '../entities/task/taskSlice';
 import { listSlice } from '../entities/list/listSlice';
+import { projectSlice } from '../entities/project/projectSlice';
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(taskSlice, listSlice);
+const rootReducer = combineSlices(
+  taskSlice,
+  listSlice,
+  projectSlice,
+);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 

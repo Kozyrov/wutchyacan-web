@@ -2,17 +2,9 @@ import React from 'react';
 import './App.css';
 import SideBar from './components/sideBar/SideBar';
 import { Link, Outlet } from 'react-router-dom';
-import BladeMenu from './components/bladeMenu/BladeMenu';
+import ProjectsMenu from './features/projectsMenu/ProjectsMenu';
 
 const App = () => {
-  const handleProjectNavigation = () => {
-    console.log('Project navigation');
-  };
-
-  const handleAddNewProject = () => {
-    console.log('Add new project');
-  };
-
   return (
     <div id="watchucan_web_app" data-testid="app">
       <header></header>
@@ -25,12 +17,7 @@ const App = () => {
                   <Link to="/inbox">Inbox</Link>
                 </div>
                  
-                <BladeMenu
-                  label="Projects"
-                  addOptionAction={handleAddNewProject}
-                  menuOptions={[]}
-                  selectAction={handleProjectNavigation}
-                />
+                <ProjectsMenu />
               </nav>
             </div>
           </SideBar>

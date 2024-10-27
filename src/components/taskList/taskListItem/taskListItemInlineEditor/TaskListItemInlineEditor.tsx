@@ -10,14 +10,14 @@ const TaskListItemInlineEditor = ({
   task,
   onCancel,
 }: TaskListItemInlineEditorProps) => {
-  const [label, setLabel] = useState<string>(task.label);
+  const [name, setName] = useState<string>(task.name);
 
   return (
     <div data-testid="task-list-item-inline-editor">
       <input
         type="text"
-        value={label}
-        onChange={e => setLabel(e.target.value)}
+        value={name}
+        onChange={e => setName(e.target.value)}
       />
       <div>
         <button type="button" onClick={onCancel}>

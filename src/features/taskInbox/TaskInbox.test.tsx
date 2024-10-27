@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { TaskInbox } from './TaskInbox';
+import TaskInbox from './TaskInbox';
 import { Provider } from 'react-redux';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { addTask, taskSlice } from '../../entities/task/taskSlice';
@@ -15,7 +15,7 @@ describe('TaskInbox', () => {
   let store: ReturnType<typeof configureStore>;
   const taskItem: Task = {
     id: '1',
-    label: 'Test Task',
+    name: 'Test Task',
     points: 0,
     list: inboxId,
     completed: false,
