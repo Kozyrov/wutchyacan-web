@@ -45,6 +45,11 @@ export const projectSlice = createAppSlice({
 });
 
 export const {
+  addProject,
+  updateProject,
+} = projectSlice.actions;
+
+export const {
   selectById: selectProjectById,
 } = projectAdapter.getSelectors((state: RootState) => state.project);
 

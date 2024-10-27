@@ -15,7 +15,7 @@ const BladeMenu = ({
   menuOptions,
   selectAction,
 }: BladeMenuProps) => {
-  const [isToggled, setIsToggled] = React.useState(false);
+  const [isToggled, setIsToggled] = React.useState(true);
 
   return (
     <div className="flex-col">
