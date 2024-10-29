@@ -16,7 +16,7 @@ const App = () => {
                 <div className="flex">
                   <Link to="/inbox">Inbox</Link>
                 </div>
-                 
+
                 <ProjectsMenu />
               </nav>
             </div>

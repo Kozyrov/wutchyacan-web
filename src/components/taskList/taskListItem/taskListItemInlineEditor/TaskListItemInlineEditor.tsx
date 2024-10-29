@@ -14,11 +14,7 @@ const TaskListItemInlineEditor = ({
 
   return (
     <div data-testid="task-list-item-inline-editor">
-      <input
-        type="text"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
+      <input type="text" value={name} onChange={e => setName(e.target.value)} />
       <div>
         <button type="button" onClick={onCancel}>
           Cancel

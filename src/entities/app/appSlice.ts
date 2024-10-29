@@ -1,8 +1,8 @@
-import { createAppSlice } from "../../app/createAppSlice";
+import { createAppSlice } from '../../app/createAppSlice';
 
 interface AppState {
   isModalOpen: boolean;
-};
+}
 
 const initialAppState = {
   isModalOpen: false,
@@ -23,12 +23,8 @@ export const appSlice = createAppSlice({
   },
 });
 
-export const {
-  toggleModal,
-} = appSlice.actions;
+export const { toggleModal } = appSlice.actions;
 
-export const {
-  selectIsModalOpen,
-} = appSlice.selectors;
+export const { selectIsModalOpen } = appSlice.selectors;
 
 export default appSlice.reducer;

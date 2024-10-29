@@ -3,15 +3,21 @@ import { createPortal } from 'react-dom';
 
 interface ModalOverlayProps {
   toggleOff: () => void;
-};
+}
 
-const ModalOverlay = ({ children, toggleOff }: PropsWithChildren<ModalOverlayProps>) => {
+const ModalOverlay = ({
+  children,
+  toggleOff,
+}: PropsWithChildren<ModalOverlayProps>) => {
   const modalRoot = document.getElementById('modal-root');
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (modalRef?.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef?.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         toggleOff();
       }
     };
@@ -30,11 +36,17 @@ const ModalOverlay = ({ children, toggleOff }: PropsWithChildren<ModalOverlayPro
   return createPortal(
     <div className="fixed flex z-10 left-0 top-0 w-screen h-screen bg-black/40 items-center justify-center">
       <div ref={modalRef} className="relative bg-white p-8">
-        <button type="button" className="absolute right-3 top-2" onClick={toggleOff}>X</button>
+        <button
+          type="button"
+          className="absolute right-3 top-2"
+          onClick={toggleOff}
+        >
+          X
+        </button>
         {children}
       </div>
     </div>,
-    modalRoot,
+    modalRoot
   );
 };
 
