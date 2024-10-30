@@ -17,7 +17,7 @@ export const appSlice = createAppSlice({
     },
   },
   selectors: {
-    selectIsModalOpen(state: AppState) {
+    selectIsModalOpen: (state: AppState): boolean => {
       return state.isModalOpen;
     },
   },

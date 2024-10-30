@@ -4,15 +4,18 @@ import { Option, Project } from '../../app/types';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   addProject,
-  selectAllProjectOptions,
+  selectAllProjects,
 } from '../../entities/project/projectSlice';
 import ModalOverlay from '../../components/modalOverlay/ModalOverlay';
 import ProjectEntry from '../../components/projectEntry/ProjectEntry';
 import { generateNewProject } from '../../utils/utility-methods';
+import { redirect } from 'react-router-dom';
 
 const ProjectsMenu = () => {
   const dispatch = useAppDispatch();
-  const projectOptions: Option[] = useAppSelector(selectAllProjectOptions);
+  const projectOptions: Option[] = useAppSelector(selectAllProjects).map(
+    project => ({ id: project.id, label: project.name })
+  );
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [freshProject, setFreshProject] = React.useState(generateNewProject());
 
@@ -26,8 +29,10 @@ const ProjectsMenu = () => {
     setFreshProject(generateNewProject());
   };
 
-  const handleProjectNavigation = () => {
-    console.log('Project navigation');
+  const handleProjectNavigation = (selectedProjectOption: Option) => {
+    redirect(
+      `/project/${selectedProjectOption.label}/${selectedProjectOption.id}`
+    );
   };
 
   const renderNewProjectEntryModal = () => {

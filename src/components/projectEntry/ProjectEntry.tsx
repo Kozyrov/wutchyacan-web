@@ -28,7 +28,12 @@ const ProjectEntry = ({ incomingProject, save, cancel }: ProjectEntryProps) => {
             type="text"
             id="project-name"
             value={project.name}
-            onChange={e => setProject({ ...project, name: e.target.value })}
+            onChange={e =>
+              setProject({
+                ...project,
+                name: e.target.value,
+              })
+            }
           />
         </div>
       </div>

@@ -5,7 +5,7 @@ import Blade from './blade/Blade';
 interface BladeMenuProps {
   label: string;
   addOptionAction?: () => void;
-  selectAction: (optionId: string) => void;
+  selectAction: (selectedOption: Option) => void;
   menuOptions: Option[];
 }
 

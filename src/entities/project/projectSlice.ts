@@ -1,8 +1,7 @@
-import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
+import { createEntityAdapter } from '@reduxjs/toolkit';
 import { Project } from '../../app/types';
 import { createAppSlice } from '../../app/createAppSlice';
 import { addList } from '../list/listSlice';
-import { Option } from '../../app/types';
 import { RootState } from '../../app/store';
 
 const projectAdapter = createEntityAdapter<Project>();
@@ -15,20 +14,6 @@ export const projectSlice = createAppSlice({
   reducers: {
     addProject: projectAdapter.addOne,
     updateProject: projectAdapter.updateOne,
-  },
-  selectors: {
-    selectAllProjectOptions: (
-      state: EntityState<Project, string>
-    ): Option[] => {
-      const projectOptions: Option[] = projectAdapter
-        .getSelectors()
-        .selectAll(state)
-        .map(project => ({
-          id: project.id,
-          label: project.name,
-        }));
-      return projectOptions;
-    },
   },
   extraReducers: builder => {
     builder.addCase(addList, (state, action) => {
@@ -45,10 +30,7 @@ export const projectSlice = createAppSlice({
 
 export const { addProject, updateProject } = projectSlice.actions;
 
-export const { selectById: selectProjectById } = projectAdapter.getSelectors(
-  (state: RootState) => state.project
-);
-
-export const { selectAllProjectOptions } = projectSlice.selectors;
+export const { selectById: selectProjectById, selectAll: selectAllProjects } =
+  projectAdapter.getSelectors((state: RootState) => state.project);
 
 export default projectSlice.reducer;

@@ -12,6 +12,7 @@ import {
 import { List, Task } from '../../app/types';
 import { RootState } from '../../app/store';
 import { addTask, taskSlice } from '../task/taskSlice';
+import { useAppSelector } from '../../app/hooks';
 
 // src/entities/list/listSlice.test.ts
 
@@ -118,22 +119,25 @@ describe('listSlice', () => {
 
   it('should select list by id', () => {
     store.dispatch(addList(listItem));
-    const state = store.getState() as RootState;
-    const selectedList = selectListById(state, listItem.id);
+    const selectedList = useAppSelector(state =>
+      selectListById(state, listItem.id)
+    );
     expect(selectedList).toEqual(listItem);
   });
 
   it('should return a list of task ids from any of the task status sub-lists by list id', () => {
     store.dispatch(addList(listItem));
-    const state = store.getState() as RootState;
-    const membersList = selectAllTasksByListId(listItem.id, 'members')(state);
+    const membersList = useAppSelector(
+      selectAllTasksByListId(listItem.id, 'members')
+    );
     expect(membersList.length).toEqual(listItem.members.length);
-    const removedList = selectAllTasksByListId(listItem.id, 'removed')(state);
+    const removedList = useAppSelector(
+      selectAllTasksByListId(listItem.id, 'removed')
+    );
     expect(removedList.length).toEqual(listItem.removed.length);
-    const completedList = selectAllTasksByListId(
-      listItem.id,
-      'completed'
-    )(state);
+    const completedList = useAppSelector(
+      selectAllTasksByListId(listItem.id, 'completed')
+    );
     expect(completedList.length).toEqual(listItem.completed.length);
   });
 });

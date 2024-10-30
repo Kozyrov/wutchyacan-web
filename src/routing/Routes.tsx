@@ -4,6 +4,7 @@ import App from '../App';
 import ErrorPage from './ErrorPage';
 import TaskInbox from '../features/taskInbox/TaskInbox';
 import OverviewDashboard from '../features/overviewDashboard/OverviewDashboard';
+import Project from '../features/project/Project';
 
 const Router = createBrowserRouter([
   {
@@ -12,12 +13,17 @@ const Router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
         path: '/',
         element: <OverviewDashboard />,
       },
       {
         path: '/inbox',
         element: <TaskInbox />,
+      },
+      {
+        path: '/project/:projectName/:projectId',
+        element: <Project />,
       },
     ],
   },

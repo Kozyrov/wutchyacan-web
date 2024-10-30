@@ -88,7 +88,7 @@ export const selectAllTasksByListId = (
   createSelector(
     [listState, taskState],
     (list: EntityState<List, string>, task: EntityState<Task, string>) => {
-      const memberIds: string[] = list.entities[listId]?.[targetList] || [];
+      const memberIds: string[] = list.entities[listId]?.[targetList];
       const memberTasks = memberIds.map(
         (memberId: string) => task.entities[memberId]
       );
