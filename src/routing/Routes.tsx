@@ -4,8 +4,8 @@ import App from '../App';
 import ErrorPage from './ErrorPage';
 import TaskInbox from '../features/taskInbox/TaskInbox';
 import OverviewDashboard from '../features/overviewDashboard/OverviewDashboard';
-import Project from '../components/project/ProjectView';
 import { projectLoader } from './dataLoaders';
+import ProjectView from '../features/projectView/ProjectView';
 
 const Router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/project/:projectName/:projectId',
-        element: <Project />,
+        element: <ProjectView />,
         loader: projectLoader,
       },
     ],
