@@ -22,5 +22,4 @@ export const generateNewProject = (): Project => ({
       isDefault: true,
     },
   ],
-  removedList: '',
 });
