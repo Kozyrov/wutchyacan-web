@@ -15,6 +15,12 @@ export const generateBlankTask = (listId: string): Task => ({
 export const generateNewProject = (): Project => ({
   id: nanoid(),
   name: '',
-  lists: [],
+  lists: [
+    {
+      id: nanoid(),
+      label: 'Unsorted Tasks',
+      isDefault: true,
+    },
+  ],
   removedList: '',
 });

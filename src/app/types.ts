@@ -21,10 +21,14 @@ export interface Option {
   label: string;
 }
 
+export interface TaskListOption extends Option {
+  isDefault?: boolean;
+}
+
 export interface Project {
   id: string;
   name: string;
-  lists: Option[];
+  lists: TaskListOption[];
   removedList: string;
 }
 

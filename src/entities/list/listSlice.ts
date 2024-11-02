@@ -8,6 +8,7 @@ import { List, Task, TaskStatusLists } from '../../app/types';
 import { RootState } from '../../app/store';
 import { inboxId } from '../../app/constants';
 import { addTask, deleteTask, completeTask } from '../task/taskSlice';
+import { addProject } from '../project/projectSlice';
 
 const listAdapter = createEntityAdapter<List>();
 
@@ -75,6 +76,19 @@ export const listSlice = createSlice({
         };
 
         listAdapter.updateOne(state, updateCompletePayload);
+      })
+      .addCase(addProject, (state, action) => {
+        const { lists } = action.payload;
+        lists.forEach(({ id, label }) => {
+          listAdapter.addOne(state, {
+            id,
+            name: label,
+            project: action.payload.id,
+            members: [],
+            removed: [],
+            completed: [],
+          });
+        });
       });
   },
 });
