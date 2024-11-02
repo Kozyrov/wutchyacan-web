@@ -9,10 +9,11 @@ import {
 import ModalOverlay from '../../components/modalOverlay/ModalOverlay';
 import ProjectEntry from '../../components/projectEntry/ProjectEntry';
 import { generateNewProject } from '../../utils/utility-methods';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectsMenu = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const projectOptions: Option[] = useAppSelector(selectAllProjects).map(
     project => ({ id: project.id, label: project.name })
   );
@@ -30,7 +31,7 @@ const ProjectsMenu = () => {
   };
 
   const handleProjectNavigation = (selectedProjectOption: Option) => {
-    redirect(
+    navigate(
       `/project/${selectedProjectOption.label}/${selectedProjectOption.id}`
     );
   };

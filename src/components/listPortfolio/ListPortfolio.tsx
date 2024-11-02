@@ -1,9 +1,9 @@
 import React from 'react';
 import TaskListManager from '../taskListManager/TaskListManager';
-import { Option } from '../../app/types';
+import { TaskListOption } from '../../app/types';
 
 interface ListPortfolioProps {
-  taskListsOptions: Option[];
+  taskListsOptions: TaskListOption[];
 }
 
 const ListPortfolio = ({ taskListsOptions }: ListPortfolioProps) => {
@@ -12,7 +12,7 @@ const ListPortfolio = ({ taskListsOptions }: ListPortfolioProps) => {
       {taskListsOptions.map(taskListOption => (
         <div key={`${taskListOption.id}_${taskListOption.label}`}>
           <h1>{`${taskListOption.label}`}</h1>
-          <TaskListManager taskListId={taskListOption.id} />
+          <TaskListManager taskListOption={taskListOption} />
         </div>
       ))}
     </div>
