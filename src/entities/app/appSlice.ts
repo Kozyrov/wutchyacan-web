@@ -1,6 +1,6 @@
 import { createAppSlice } from '../../app/createAppSlice';
 
-interface AppState {
+export interface AppState {
   isModalOpen: boolean;
 }
 

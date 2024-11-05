@@ -29,7 +29,7 @@ export interface Project {
   id: string;
   name: string;
   lists: TaskListOption[];
-  removedList: string;
+  removedList?: string;
 }
 
 export type ReduxLoadingStatus = 'idle' | 'loading' | 'failed';

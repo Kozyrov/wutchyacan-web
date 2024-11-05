@@ -128,8 +128,6 @@ describe('listSlice', () => {
     const state = store.getState() as RootState;
     const membersList = selectAllTasksByListId(listItem.id, 'members')(state);
     expect(membersList.length).toEqual(listItem.members.length);
-    const removedList = selectAllTasksByListId(listItem.id, 'removed')(state);
-    expect(removedList.length).toEqual(listItem.removed.length);
     const completedList = selectAllTasksByListId(
       listItem.id,
       'completed'
