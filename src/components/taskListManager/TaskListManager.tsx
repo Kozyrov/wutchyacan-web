@@ -34,7 +34,7 @@ const TaskListManager = ({ taskListOption }: TaskListManagerProps) => {
   };
 
   return (
-    <div data-testid="task-manager" className="flex-col m-3 p-3">
+    <div data-testid="task-list-manager" className="flex-col m-3 p-3">
       <h1 className="flex font-bold">{}</h1>
       <TaskList tasks={tasks} />
       <div className="flex-row">

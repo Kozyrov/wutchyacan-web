@@ -2,7 +2,7 @@ import React from 'react';
 import { Option } from '../../app/types';
 import Blade from './blade/Blade';
 
-interface BladeMenuProps {
+export interface BladeMenuProps {
   label: string;
   addOptionAction?: () => void;
   selectAction: (selectedOption: Option) => void;
@@ -18,7 +18,7 @@ const BladeMenu = ({
   const [isToggled, setIsToggled] = React.useState(true);
 
   return (
-    <div className="flex-col">
+    <div className="flex-col" data-testid="blade-menu">
       <div className="flex">
         <h1>{label}</h1>
         {addOptionAction && (

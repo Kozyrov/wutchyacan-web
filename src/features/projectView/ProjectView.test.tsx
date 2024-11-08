@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { projectSlice } from '../../entities/project/projectSlice';
 import { List, Project } from '../../app/types';
-import { Params, useParams } from 'react-router-dom';
+import { Params } from 'react-router-dom';
 import { listSlice } from '../../entities/list/listSlice';
 
 vi.mock('react-router-dom', () => ({

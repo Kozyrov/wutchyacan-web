@@ -1,10 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { configureStore } from '@reduxjs/toolkit';
-import appReducer, {
-  toggleModal,
-  selectIsModalOpen,
-  AppState,
-} from './appSlice';
+import appReducer, { toggleModal, selectIsModalOpen } from './appSlice';
 import { RootState } from '../../app/store';
 
 describe('appSlice', () => {
