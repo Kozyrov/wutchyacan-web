@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ListPortfolio from '../../components/listPortfolio/ListPortfolio';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';

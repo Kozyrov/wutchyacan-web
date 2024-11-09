@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Project } from '../../app/types';
 
-interface ProjectEntryProps {
+export interface ProjectEntryProps {
   save: (project: Project) => void;
   cancel: () => void;
   incomingProject: Project;
